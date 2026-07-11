@@ -1,0 +1,35 @@
+- id: roller_shutter
+  name: Roller Shutter
+  name_i18n:
+    en: Roller Shutter
+    de: Rollladen
+- id: relay_dual_channel
+  name: Relay (dual-channel)
+  name_i18n:
+    en: Relay (dual-channel)
+    de: Relais (2 Kanaele)
+- id: wall_switch
+  name: Wall Switch
+  name_i18n:
+    en: Wall Switch
+    de: Wandschalter
+- id: wall_switch_dimmer
+  name: Wall Switch (dimmer)
+  name_i18n:
+    en: Wall Switch (dimmer)
+    de: Wandschalter (Dimmer)
+- id: plug
+  name: Plug
+  name_i18n:
+    en: Plug
+    de: Steckdose
+- id: light_globe
+  name: Light / Globe
+  name_i18n:
+    en: Light / Globe
+    de: Licht / Kugellampe
+- id: sensor
+  name: Sensor
+  name_i18n:
+    en: Sensor
+    de: Sensor

@@ -1,0 +1,608 @@
+- id: shutter_office_1
+  name: "Shutter-Office-1"
+  current_name: "ShutterBedroomSide"
+  mac: "4C:75:25:33:53:98"
+  ip: "192.168.178.95"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Home Office (Schlafen)"
+  installed_room_id: home_office_schlafen
+  notes: 'Room confirmed via floorplan. Pick a real descriptor (e.g. Left/Right) to replace "-1".'
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_office_2
+  name: "Shutter-Office-2"
+  current_name: "ShutterBedroomFront"
+  mac: "4C:75:25:33:B2:32"
+  ip: "192.168.178.97"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Home Office (Schlafen)"
+  installed_room_id: home_office_schlafen
+  notes: 'Room confirmed via floorplan. Pick a real descriptor to replace "-2".'
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_bedroom_a
+  name: "Shutter-Bedroom-A"
+  current_name: "ShutterOffice"
+  mac: "48:55:19:02:78:22"
+  ip: "192.168.178.103"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Master Bedroom (Zimmer 1)"
+  installed_room_id: master_bedroom_zimmer_1
+  notes: "Room confirmed via floorplan: the odd-shaped room (Zimmer 1) is the master bedroom."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_bedroom_b
+  name: "Shutter-Bedroom-B"
+  current_name: "ShutterBedroom"
+  mac: "10:52:1C:07:07:4F"
+  ip: "192.168.178.88"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Second Bedroom (Zimmer 2)"
+  installed_room_id: second_bedroom_zimmer_2
+  notes: "Room confirmed via floorplan: this is the smaller regular-shaped room (Zimmer 2)."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_laundry
+  name: "Shutter-Laundry"
+  current_name: "ShutterLaundry"
+  mac: "4C:75:25:33:16:4E"
+  ip: "192.168.178.102"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Duschbad (utility bathroom)"
+  installed_room_id: duschbad_utility_bathroom
+  notes: "Room confirmed by Geert."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_kitchenbench
+  name: "Shutter-KitchenBench"
+  current_name: "ShutterKitchenBench"
+  mac: "C4:5B:BE:62:0E:08"
+  ip: "192.168.178.81"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Kitchen (Kueche)"
+  installed_room_id: kitchen_kueche
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_kitchen
+  name: "Shutter-Kitchen"
+  current_name: "ShutterKitchen"
+  mac: "98:CD:AC:24:74:6D"
+  ip: "192.168.178.96"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Kitchen (Kueche)"
+  installed_room_id: kitchen_kueche
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_garden
+  name: "Shutter-Garden"
+  current_name: "ShutterGarden"
+  mac: "A0:A3:B3:C4:28:E0"
+  ip: "192.168.178.83"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Garden (exterior - not on interior floorplan)"
+  installed_room_id: garden_exterior_not_on_interior_floorplan
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_carpark
+  name: "Shutter-CarPark"
+  current_name: "ShutterCarPark"
+  mac: "C4:5B:BE:61:37:81"
+  ip: "192.168.178.98"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Car park (exterior - not on interior floorplan)"
+  installed_room_id: car_park_exterior_not_on_interior_floorplan
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_bathroom
+  name: "Shutter-Bathroom"
+  current_name: "ShutterBathroom"
+  mac: "48:55:19:03:18:25"
+  ip: "192.168.178.93"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Bathroom (Bad)"
+  installed_room_id: bathroom_bad
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_backgate
+  name: "Shutter-BackGate"
+  current_name: "ShutterBackGate"
+  mac: "C4:D8:D5:57:ED:38"
+  ip: "192.168.178.118"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Back gate (exterior - not on interior floorplan)"
+  installed_room_id: back_gate_exterior_not_on_interior_floorplan
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: shutter_backdeck
+  name: "Shutter-BackDeck"
+  current_name: "ShutterBackDeck"
+  mac: "1C:69:20:45:C4:BC"
+  ip: "192.168.178.28"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Roller Shutter"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Back deck (exterior - not on interior floorplan)"
+  installed_room_id: back_deck_exterior_not_on_interior_floorplan
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: relay_tableandlounge
+  name: "Relay-TableAndLounge"
+  current_name: "RelayTableAndLounge"
+  mac: "80:64:6F:C8:4E:E8"
+  ip: "192.168.178.80"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Relay (dual-channel)"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Living/Dining (Wohnen/Essen)"
+  installed_room_id: living_dining_wohnen_essen
+  notes: "Furniture was swapped (table/lounge positions) - channel names kept as-is for now per Geert; can be renamed later directly in the yaml files."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: relay_laundryandfridge
+  name: "Relay-LaundryAndFridge"
+  current_name: "RelayLaundryAndFridge"
+  mac: "4C:75:25:34:22:4C"
+  ip: "192.168.178.94"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Relay (dual-channel)"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Duschbad (utility bathroom)"
+  installed_room_id: duschbad_utility_bathroom
+  notes: "Room confirmed by Geert."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: relay_bathroomheatermirror
+  name: "Relay-BathroomHeaterMirror"
+  current_name: "RelayBathroomHeaterAndMirrorL"
+  mac: "4C:75:25:32:E7:8F"
+  ip: "192.168.178.92"
+  model: "Shelly 2.5/2PM (confirm)"
+  device_type: "Relay (dual-channel)"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Bathroom (Bad)"
+  installed_room_id: bathroom_bad
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: switch_tap
+  name: "Switch-Tap"
+  current_name: "SwitchTap"
+  mac: "84:F3:EB:E0:E7:26"
+  ip: "192.168.178.86"
+  model: "Shelly model TBD"
+  device_type: "Wall Switch"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Exterior (tap/garden - not on interior floorplan)"
+  installed_room_id: exterior_tap_garden_not_on_interior_floorplan
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: switch_storage
+  name: "Switch-Storage"
+  current_name: "SwitchStorage"
+  mac: "C4:5B:BE:78:52:89"
+  ip: "192.168.178.82"
+  model: "Shelly model TBD"
+  device_type: "Wall Switch"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Storage (Abstell)"
+  installed_room_id: storage_abstell
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: switch_office
+  name: "Switch-Office"
+  current_name: "SwitchOffice"
+  mac: "A4:CF:12:BA:2E:24"
+  ip: "192.168.178.99"
+  model: "Shelly model TBD"
+  device_type: "Wall Switch"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Master Bedroom (Zimmer 1)"
+  installed_room_id: master_bedroom_zimmer_1
+  notes: "Room confirmed via floorplan: named for the original office location, which is now the master bedroom (Zimmer 1)."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: switch_masterbedroom
+  name: "Switch-MasterBedroom"
+  current_name: "SwitchMasterBedroom"
+  mac: "A4:CF:12:B9:FB:F0"
+  ip: "192.168.178.104"
+  model: "Shelly model TBD"
+  device_type: "Wall Switch"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Home Office (Schlafen)"
+  installed_room_id: home_office_schlafen
+  notes: "Room confirmed via floorplan: named for the original master bedroom location, which is now the home office (Schlafen)."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: switch_kitchenled
+  name: "Switch-KitchenLED"
+  current_name: "SwitchLEDKitchen"
+  mac: "E8:9F:6D:86:67:BB"
+  ip: "192.168.178.84"
+  model: "Shelly model TBD"
+  device_type: "Wall Switch"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Kitchen (Kueche)"
+  installed_room_id: kitchen_kueche
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: dimmer_hallway
+  name: "Dimmer-Hallway"
+  current_name: "DimmerSwitchHallway"
+  mac: "98:CD:AC:0C:63:4E"
+  ip: "192.168.178.101"
+  model: "Shelly Dimmer (confirm)"
+  device_type: "Wall Switch (dimmer)"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Hallway (Diele)"
+  installed_room_id: hallway_diele
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: plug_lamp
+  name: "Plug-Lamp"
+  current_name: "PlugLamp"
+  mac: "F4:CF:A2:FD:CB:98"
+  ip: "192.168.178.91"
+  model: "Shelly Plug (confirm)"
+  device_type: "Plug"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Lamp location"
+  installed_room_id: lamp_location
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: plug_dishwasher
+  name: "Plug-Dishwasher"
+  current_name: "DishWasherPlug"
+  mac: "80:64:6F:D1:EC:5C"
+  ip: "192.168.178.53"
+  model: "Shelly Plug (confirm)"
+  device_type: "Plug"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Kitchen (Kueche)"
+  installed_room_id: kitchen_kueche
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: plug_washingmachine
+  name: "Plug-WashingMachine"
+  current_name: "PowerWashingMachine"
+  mac: "E8:DB:84:D3:C3:F1"
+  ip: "192.168.178.90"
+  model: "Shelly Plug (confirm)"
+  device_type: "Plug"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Duschbad (utility bathroom)"
+  installed_room_id: duschbad_utility_bathroom
+  notes: "Room confirmed by Geert."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: plug_unnamed
+  name: "Plug-Unnamed"
+  current_name: "PlugSwitch"
+  mac: "80:64:6F:D6:48:68"
+  ip: "192.168.8.241"
+  model: "Shelly Plug (confirm)"
+  device_type: "Plug"
+  connects_via: "Stale (old subnet)"
+  status: "Idle/offline"
+  installed_location: "Unknown"
+  installed_room_id: unknown
+  notes: "Identify purpose, reassign fixed IP, reconnect or retire."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: globe_table
+  name: "Globe-Table"
+  current_name: "GlobeTable"
+  mac: "98:CD:AC:2C:88:9B"
+  ip: "192.168.178.105"
+  model: "Shelly Duo/Bulb (confirm)"
+  device_type: "Light / Globe"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Living/Dining (Wohnen/Essen)"
+  installed_room_id: living_dining_wohnen_essen
+  notes: "Furniture was swapped - fixture name kept as-is for now."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: globe_lounge
+  name: "Globe-Lounge"
+  current_name: "GlobeLounge"
+  mac: "34:94:54:6A:FF:4B"
+  ip: "192.168.178.110"
+  model: "Shelly Duo/Bulb (confirm)"
+  device_type: "Light / Globe"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Living/Dining (Wohnen/Essen)"
+  installed_room_id: living_dining_wohnen_essen
+  notes: "Furniture was swapped - fixture name kept as-is for now."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: led_tvstrip
+  name: "LED-TVStrip"
+  current_name: "LEDTVStrip"
+  mac: "C4:5B:BE:E4:CA:CA"
+  ip: "192.168.178.85"
+  model: "Shelly RGBW/LED strip (confirm)"
+  device_type: "Light / Globe"
+  connects_via: "LittleJerry"
+  status: "Online"
+  installed_location: "Living/Dining (Wohnen/Essen)"
+  installed_room_id: living_dining_wohnen_essen
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: globe_loungeright
+  name: "Globe-LoungeRight"
+  current_name: "GlobeLoungeRight"
+  mac: "34:94:54:6B:05:45"
+  ip: "192.168.8.185"
+  model: "Shelly Duo/Bulb (confirm)"
+  device_type: "Light / Globe"
+  connects_via: "Stale (old subnet)"
+  status: "Idle/offline"
+  installed_location: "Living/Dining (Wohnen/Essen)"
+  installed_room_id: living_dining_wohnen_essen
+  notes: "Reconnect or retire; stale 192.168.8.x lease."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: globe_kitchen
+  name: "Globe-Kitchen"
+  current_name: "GlobeKitchen"
+  mac: "A8:BB:50:32:3C:90"
+  ip: "192.168.178.38"
+  model: "Shelly Duo/Bulb (confirm)"
+  device_type: "Light / Globe"
+  connects_via: "Unknown - not seen by LittleJerry"
+  status: "Idle/offline"
+  installed_location: "Kitchen (Kueche)"
+  installed_room_id: kitchen_kueche
+  notes: "Only appears in FRITZ!Box history, not LittleJerry. Reconnect or retire."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: globe_masterbedroom
+  name: "Globe-MasterBedroom"
+  current_name: "GlobeMasterBedroom"
+  mac: "FC:F5:C4:B2:28:E1"
+  ip: "192.168.178.50"
+  model: "Shelly Duo/Bulb (confirm)"
+  device_type: "Light / Globe"
+  connects_via: "Unknown - not seen by LittleJerry"
+  status: "Idle/offline"
+  installed_location: "Home Office (Schlafen)"
+  installed_room_id: home_office_schlafen
+  notes: "Room confirmed via floorplan: named for the original master bedroom location, which is now the home office (Schlafen). Only appears in FRITZ!Box history, not LittleJerry. Reconnect or retire."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: led_cabinet
+  name: "LED-Cabinet"
+  current_name: "LEDCabinet"
+  mac: "3C:61:05:E7:49:21"
+  ip: "192.168.8.231"
+  model: "Shelly RGBW/LED strip (confirm)"
+  device_type: "Light / Globe"
+  connects_via: "Stale (old subnet)"
+  status: "Idle/offline"
+  installed_location: "Cabinet"
+  installed_room_id: cabinet
+  notes: "Reconnect or retire; stale 192.168.8.x lease."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: wiz_kitchen
+  name: "Wiz-Kitchen"
+  current_name: "(not a tracked network client)"
+  mac: "n/a"
+  ip: "n/a"
+  model: "WiZ smart bulb"
+  device_type: "Light (WiZ)"
+  connects_via: "Home Assistant (WiZ integration) - not visible in FRITZ!Box or LittleJerry client lists"
+  status: "Managed via HA"
+  installed_location: "Kitchen (Kueche)"
+  installed_room_id: kitchen_kueche
+  notes: "Controlled through Home Assistant actions rather than a discrete tracked network client. If HA reaches it over IP, find its address in HA > Settings > Devices > this device > Diagnostics, and add it here + a router reservation."
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: walldisplay_familyroom
+  name: "WallDisplay-FamilyRoom"
+  current_name: 'Shelly Wall Display (was showing as "SwitchKitchen")'
+  mac: "00:08:22:5C:AC:58"
+  ip: "192.168.178.35"
+  model: "Shelly Wall Display"
+  device_type: "Control Panel"
+  connects_via: "FRITZ!Box Wi-Fi direct"
+  status: "Idle/offline"
+  installed_location: "Kitchen (Kueche)"
+  installed_room_id: kitchen_kueche
+  notes: 'This is the device previously listed as "SwitchKitchen" - has a built-in relay used for the kitchen light. Currently idle/offline - worth reconnecting.'
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: ap_littlejerry
+  name: "AP-LittleJerry"
+  current_name: "LittleJerry (GL-AR300M)"
+  mac: "TBD"
+  ip: "TBD"
+  model: "GL.iNet GL-AR300M"
+  device_type: "Infrastructure"
+  connects_via: "LAN 3 uplink to FRITZ!Box"
+  status: "Online (uplink not yet identified)"
+  installed_location: "Network cabinet"
+  installed_room_id: network_cabinet
+  notes: 'Find its own client entry on the FRITZ!Box (candidates: "none" @ .27 or "PC-90-23-5B-0B-33-94" @ .26) and record IP/MAC here.'
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: server_kelder
+  name: "Server-Kelder"
+  current_name: "kelder"
+  mac: "E8:6A:64:D7:F9:F7"
+  ip: "192.168.178.73"
+  model: "Home Assistant host (Docker)"
+  device_type: "Infrastructure"
+  connects_via: "LAN 2 (wired)"
+  status: "Online"
+  installed_location: "Basement/server room"
+  installed_room_id: basement_server_room
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: repeater_main
+  name: "Repeater-Main"
+  current_name: "FritzRepeater"
+  mac: "66:B5:8D:B0:63:08"
+  ip: "192.168.178.44"
+  model: "FRITZ!Repeater 1200 AX"
+  device_type: "Infrastructure"
+  connects_via: "LAN 1 (wired)"
+  status: "Online"
+  installed_location: "TBD"
+  installed_room_id: tbd
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []
+- id: camera_blinkmini
+  name: "Camera-BlinkMini"
+  current_name: "Blink-Mini"
+  mac: "00:F3:61:34:xx:xx"
+  ip: "192.168.178.22"
+  model: "Blink Mini"
+  device_type: "Camera"
+  connects_via: "Wi-Fi 2.4 GHz (direct)"
+  status: "Online"
+  installed_location: "TBD"
+  installed_room_id: tbd
+  notes: ""
+  floorplan_position:
+    x: 50
+    y: 50
+  images: []

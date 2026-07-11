@@ -1,0 +1,66 @@
+- id: basement_shared_bike_room
+  name: "Bike Room"
+  name_i18n:
+    en: Bike Room
+    de: Fahrradraum
+  floor_id: basement
+- id: gym
+  name: "Gym"
+  name_i18n:
+    en: Gym
+    de: Fitnessraum
+  floor_id: basement
+- id: bathroom
+  name: "Bathroom"
+  name_i18n:
+    en: Bathroom
+    de: Badezimmer
+  floor_id: ground_floor
+- id: car_park_exterior_not_on_interior_floorplan
+  name: "Car Park"
+  name_i18n:
+    en: Car Park
+    de: Stellplatz
+  floor_id: exterior_site
+- id: laundry
+  name: "Laundry"
+  name_i18n:
+    en: Laundry
+    de: Duschbad
+  floor_id: ground_floor
+- id: hallway
+  name: "Hallway"
+  name_i18n:
+    en: Hallway
+    de: Diele
+  floor_id: ground_floor
+- id: home_office
+  name: "Home Office"
+  name_i18n:
+    en: Home Office
+    de: Home Office
+  floor_id: ground_floor
+- id: living_dining
+  name: "Living/Dining"
+  name_i18n:
+    en: Living/Dining
+    de: Wohnen/Essen
+  floor_id: ground_floor
+- id: master_bedroom
+  name: "Master Bedroom"
+  name_i18n:
+    en: Master Bedroom
+    de: Hauptschlafzimmer
+  floor_id: ground_floor
+- id: second_bedroom
+  name: "Second Bedroom"
+  name_i18n:
+    en: Second Bedroom
+    de: Zweites Schlafzimmer
+  floor_id: ground_floor
+- id: storage
+  name: "Storage"
+  name_i18n:
+    en: Pantry
+    de: Abstellraum
+  floor_id: ground_floor

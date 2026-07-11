@@ -1,0 +1,14 @@
+- id: ground_floor
+  name: Ground Floor
+  name_i18n:
+    en: Ground Floor
+    de: Erdgeschoss
+  floorplan_image: /floorplans/GroundFloor.png
+  floorplan_svg: /floorplans/FloorMap.svg
+- id: basement
+  name: Basement
+  name_i18n:
+    en: Basement
+    de: Keller
+  floorplan_image: /floorplans/Basement.png
+  floorplan_svg: ""

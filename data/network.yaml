@@ -1,0 +1,17 @@
+subnet: "192.168.178.0/24"
+routing_mode: "Single LAN broadcast domain via bridged AP"
+infrastructure:
+  router: "FRITZ!Box 6591 Cable (or buyer router equivalent)"
+  access_point: "GL.iNet GL-AR300M LittleJerry (bridge mode)"
+  server: "Kelder Home Assistant host"
+ip_blocks:
+  relays_and_switches: "80-89"
+  plugs_and_power: "90-99"
+  shutters: "100-119"
+  lights_and_globes: "120-139"
+  control_panels: "140-149"
+  spare_growth: "150-199"
+handover:
+  include_littlejerry: true
+  include_kelder: true
+  router_agnostic: true
