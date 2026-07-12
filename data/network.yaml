@@ -1,9 +1,23 @@
 subnet: "192.168.178.0/24"
 routing_mode: "Single LAN broadcast domain via bridged AP"
 infrastructure:
-  router: "FRITZ!Box 6591 Cable (or buyer router equivalent)"
-  access_point: "GL.iNet GL-AR300M LittleJerry (bridge mode)"
-  server: "Kelder Home Assistant host"
+  router:
+    name: "FRITZ!Box 6591 Cable"
+    role: "Router, DHCP, main Wi-Fi for phones and laptops"
+    admin_url: "http://fritz.box"
+    default_gateway: "192.168.178.1"
+    notes: "Main router and DHCP server. Assigns fixed IPs to Shelly devices by MAC."
+  access_point:
+    name: "LittleJerry"
+    model: "GL.iNet GL-AR300M"
+    role: "Bridged Wi-Fi access point for Shelly devices"
+    mode: "bridge"
+    notes: "Do not enable router/NAT mode. All Shelly devices should use this SSID."
+  home_assistant:
+    name: "Kelder"
+    model: "Lenovo ThinkCentre M900q"
+    role: "Home Assistant host (Docker)"
+    status: "Configured for this property"
 ip_blocks:
   relays_and_switches: "80-89"
   plugs_and_power: "90-99"

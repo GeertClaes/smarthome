@@ -1,13 +1,10 @@
 import "./globals.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Sora, Space_Grotesk } from "next/font/google";
-import { LanguageProvider } from "./LanguageProvider";
-import AppHeader from "./AppHeader";
 import { getData } from "@/lib/data";
-
-export const metadata = {
-  title: "Smart Home Docs",
-  description: "Device, channel, and installation documentation",
-};
+import { LanguageProvider } from "./LanguageProvider";
+import { SiteContentProvider } from "./SiteContentProvider";
+import AppHeader from "./AppHeader";
 
 const bodyFont = Space_Grotesk({
   subsets: ["latin"],
@@ -19,17 +16,32 @@ const displayFont = Sora({
   variable: "--font-display",
 });
 
+export async function generateMetadata() {
+  const { site } = getData();
+  const title = site?.meta?.title_i18n?.en ?? "JWS11 — Property 4.2";
+  const description =
+    site?.meta?.description_i18n?.en ??
+    "Device, channel, and installation documentation for JWS11 property 4.2";
+
+  return {
+    title,
+    description,
+  };
+}
+
 export default function RootLayout({ children }) {
-  const { rooms, devices } = getData();
+  const { site } = getData();
 
   return (
-    <html lang="en" data-theme="night">
+    <html lang="en" data-theme="jws11">
       <body className={`${bodyFont.variable} ${displayFont.variable}`}>
         <LanguageProvider>
-          <div className="app-shell">
-            <AppHeader roomCount={rooms.length} deviceCount={devices.length} />
-            <main className="page-wrap">{children}</main>
-          </div>
+          <SiteContentProvider site={site}>
+            <div className="app-frame">
+              <AppHeader />
+              <main className="content-pane page-wrap">{children}</main>
+            </div>
+          </SiteContentProvider>
         </LanguageProvider>
       </body>
     </html>

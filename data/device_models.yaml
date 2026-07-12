@@ -1,0 +1,96 @@
+- id: shelly_rgbw2
+  name: Shelly RGBW 2
+  manufacturer: Shelly
+  device_type: Light / Globe
+  color: "#c4b5fd"
+  manual_url: https://kb.shelly.cloud/knowledge-base/shelly-rgbw2
+  notes: RGBW LED controller (Gen1). Often used for LED strips.
+  sort_order: 1
+- id: shelly_plug_s
+  name: Shelly Plug S
+  manufacturer: Shelly
+  device_type: Plug
+  color: "#86efac"
+  manual_url: https://kb.shelly.cloud/knowledge-base/shelly-plug-s
+  notes: Smart plug with power metering (Gen1).
+  sort_order: 2
+- id: shelly_1
+  name: Shelly 1
+  manufacturer: Shelly
+  device_type: Relay (dual-channel)
+  color: "#f9a8d4"
+  manual_url: https://kb.shelly.cloud/knowledge-base/shelly-1
+  notes: Single relay switch (Gen1). Often used behind wall switches.
+  sort_order: 3
+- id: shelly_plus_2pm
+  name: Shelly Plus 2 PM
+  manufacturer: Shelly
+  device_type: Relay (dual-channel)
+  color: "#93c5fd"
+  manual_url: https://kb.shelly.cloud/knowledge-base/shelly-plus-2-pm
+  notes: Dual relay with power metering (Gen2 Plus).
+  sort_order: 4
+- id: shelly_2_5
+  name: Shelly 2.5
+  manufacturer: Shelly
+  device_type: Relay (dual-channel)
+  color: "#67e8f9"
+  manual_url: https://kb.shelly.cloud/knowledge-base/shelly-25
+  notes: Dual relay for shutters or two independent loads (Gen1).
+  sort_order: 5
+- id: shelly_dimmer_2
+  name: Shelly Dimmer 2
+  manufacturer: Shelly
+  device_type: Wall Switch (dimmer)
+  color: "#7dd3fc"
+  manual_url: https://kb.shelly.cloud/knowledge-base/shelly-dimmer-2
+  notes: Trailing-edge dimmer (Gen1).
+  sort_order: 6
+- id: shelly_duo
+  name: Shelly Duo
+  manufacturer: Shelly
+  device_type: Light / Globe
+  color: "#a5b4fc"
+  manual_url: https://kb.shelly.cloud/knowledge-base/shelly-duo
+  notes: Smart bulb with dual white channels.
+  sort_order: 7
+- id: shelly_1pm
+  name: Shelly 1PM
+  manufacturer: Shelly
+  device_type: Relay (dual-channel)
+  color: "#93c5fd"
+  manual_url: https://kb.shelly.cloud/knowledge-base/shelly-1pm
+  notes: Single relay with power metering (Gen1).
+  sort_order: 8
+- id: shelly_wall_display
+  name: Shelly Wall Display
+  manufacturer: Shelly
+  device_type: Control Panel
+  color: "#5eead4"
+  manual_url: https://kb.shelly.cloud/knowledge-base/shelly-wall-display
+  notes: Wall-mounted touch panel with built-in relay.
+  sort_order: 9
+- id: wiz_smart_bulb
+  name: WiZ smart bulb
+  manufacturer: WiZ
+  device_type: Light (WiZ)
+  color: "#fde68a"
+  manual_url: https://www.wizconnected.com/en/support
+  notes: Managed via Home Assistant WiZ integration; may not appear on the local network client list.
+  sort_order: 10
+- id: fritz_repeater_1200_ax
+  name: FRITZ!Repeater 1200 AX
+  manufacturer: AVM
+  device_type: Infrastructure
+  color: "#cbd5e1"
+  manual_url: https://en.avm.de/service/knowledge-base/dok/FRITZ-Repeater-1200-AX/
+  notes: Wi-Fi repeater; typically wired backhaul.
+  sort_order: 11
+- id: fritzbox_7590_ax
+  name: FRITZ!Box 7590 AX
+  manufacturer: AVM
+  device_type: Infrastructure
+  color: "#cbd5e1"
+  manual_url: https://en.avm.de/products/fritzbox/fritzbox-7590-ax/
+  notes: Primary router / gateway.
+  sort_order: 12

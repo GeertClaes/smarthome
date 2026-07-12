@@ -1,36 +1,20 @@
-import fs from "fs";
-import path from "path";
 import { getData } from "@/lib/data";
+import { loadSvgFromPublic } from "@/lib/svg";
 import FloorPlanConsole from "./FloorPlanConsole";
 
 const GROUND_FLOOR_SVG_BINDINGS = [
+  { svgId: "room_ld", roomId: "living_dining" },
   { svgId: "Storage", roomId: "storage" },
-  { svgId: "Hallway", roomId: "hallway" },
-  { svgId: "MasterBedroom", roomId: "master_bedroom" },
-  { svgId: "Laundry", roomId: "laundry" },
-  { svgId: "Office", roomId: "home_office" },
-  { svgId: "Bathroom", roomId: "bathroom" },
-  { svgId: "Bedroom", roomId: "second_bedroom" },
-  { svgId: "FamilyRoom", roomId: "living_dining" },
+  { svgId: "room_ha", roomId: "hallway" },
+  { svgId: "room_mb", roomId: "master_bedroom" },
+  { svgId: "room_la", roomId: "laundry" },
+  { svgId: "room_of", roomId: "home_office" },
+  { svgId: "room_ba", roomId: "bathroom" },
+  { svgId: "room_br", roomId: "second_bedroom" },
 ];
 
-function loadSvgFromPublic(svgPath) {
-  if (!svgPath) {
-    return "";
-  }
-
-  const normalizedPath = svgPath.startsWith("/") ? svgPath.slice(1) : svgPath;
-  const fullPath = path.join(process.cwd(), "public", normalizedPath);
-
-  if (!fs.existsSync(fullPath)) {
-    return "";
-  }
-
-  return fs.readFileSync(fullPath, "utf8");
-}
-
 export default function FloorMapWorkspace() {
-  const { floors, rooms, devices, deviceTypes } = getData();
+  const { floors, rooms, devices, deviceTypes, deviceModels, channels, integrations, devicePoints } = getData();
   const groundFloor = floors.find((floor) => floor.id === "ground_floor");
 
   if (!groundFloor) {
@@ -75,8 +59,13 @@ export default function FloorMapWorkspace() {
     <FloorPlanConsole
       roomBindings={roomBindings}
       devices={floorDevices}
+      registryDevices={devices}
       deviceTypes={deviceTypes}
+      deviceModels={deviceModels}
+      channels={channels}
+      integrations={integrations}
       svgMarkup={svgMarkup}
+      devicePointsRegistry={devicePoints}
     />
   );
 }

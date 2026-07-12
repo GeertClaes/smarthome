@@ -7,7 +7,7 @@
   name: Relay (dual-channel)
   name_i18n:
     en: Relay (dual-channel)
-    de: Relais (2 Kanaele)
+    de: Relais (2 Kanäle)
 - id: wall_switch
   name: Wall Switch
   name_i18n:
@@ -33,3 +33,23 @@
   name_i18n:
     en: Sensor
     de: Sensor
+- id: infrastructure
+  name: Infrastructure
+  name_i18n:
+    en: Infrastructure
+    de: Infrastruktur
+- id: light_wiz
+  name: Light (WiZ)
+  name_i18n:
+    en: Light (WiZ)
+    de: Licht (WiZ)
+- id: control_panel
+  name: Control Panel
+  name_i18n:
+    en: Control Panel
+    de: Bedienpanel
+- id: camera
+  name: Camera
+  name_i18n:
+    en: Camera
+    de: Kamera

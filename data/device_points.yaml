@@ -1,0 +1,288 @@
+- id: living_dining.ld_cp
+  code: LD-CP
+  svg_marker_id: ld_cp
+  room_id: living_dining
+  label: Car park shutter
+  label_i18n:
+    en: Car park shutter
+    de: Rollladen Stellplatz
+  images: []
+- id: living_dining.ld_lo
+  code: LD-LO
+  svg_marker_id: ld_lo
+  room_id: living_dining
+  label: Lounge globe light
+  label_i18n:
+    en: Lounge globe light
+    de: Kugellampe Lounge
+  images: []
+- id: living_dining.ld_ta
+  code: LD-TA
+  svg_marker_id: ld_ta
+  room_id: living_dining
+  label: Dining table globe
+  label_i18n:
+    en: Dining table globe
+    de: Kugellampe Esstisch
+  images: []
+- id: living_dining.ld_si
+  code: LD-SI
+  svg_marker_id: ld_si
+  room_id: living_dining
+  label: Garden tap switch
+  label_i18n:
+    en: Garden tap switch
+    de: Garten-/Wasserhahn-Schalter
+  images: []
+- id: living_dining.ls_wa
+  code: LS-WA
+  svg_marker_id: ls_wa
+  room_id: living_dining
+  label: Kitchen light switch
+  label_i18n:
+    en: Kitchen light switch
+    de: Küchenlicht-Schalter
+  notes: Shelly Wall Display built-in relay and SwitchLEDKitchen
+  images: []
+- id: living_dining.ld_wz
+  code: LD-WZ
+  svg_marker_id: ld_wz
+  room_id: living_dining
+  label: Kitchen WiZ light
+  label_i18n:
+    en: Kitchen WiZ light
+    de: Küchen-WiZ-Lampe
+  images: []
+- id: living_dining.ld_ki
+  code: LD-KI
+  svg_marker_id: ld_ki
+  room_id: living_dining
+  label: Kitchen shutter
+  label_i18n:
+    en: Kitchen shutter
+    de: Rollladen Küche
+  images: []
+- id: living_dining.ld_kb
+  code: LD-KB
+  svg_marker_id: ld_kb
+  room_id: living_dining
+  label: Kitchen bench shutter
+  label_i18n:
+    en: Kitchen bench shutter
+    de: Rollladen Küchenbank
+  notes: Also dishwasher plug at this location
+  images: []
+- id: living_dining.ld_tv
+  code: LD-TV
+  svg_marker_id: ld_tv
+  room_id: living_dining
+  label: TV LED switch
+  label_i18n:
+    en: TV LED switch
+    de: TV-LED Schalter
+  images: []
+- id: living_dining.ld_re
+  code: LD-RE
+  svg_marker_id: ld_re
+  room_id: living_dining
+  label: Relay hub
+  label_i18n:
+    en: Relay hub
+    de: Relais-Verteiler
+  images: []
+- id: living_dining.ld_ga
+  code: LD-GA
+  svg_marker_id: ld_ga
+  room_id: living_dining
+  label: Garden shutter
+  label_i18n:
+    en: Garden shutter
+    de: Rollladen Garten
+  images: []
+- id: living_dining.ld_ba
+  code: LD-BA
+  svg_marker_id: ld_ba
+  room_id: living_dining
+  label: Back deck shutter
+  label_i18n:
+    en: Back deck shutter
+    de: Rollladen Terrasse
+  images: []
+- id: living_dining.ld_la
+  code: LD-LA
+  svg_marker_id: ld_la
+  room_id: living_dining
+  label: Floor lamp plug
+  label_i18n:
+    en: Floor lamp plug
+    de: Stehlampe (Steckdose)
+  images: []
+- id: living_dining.ld_nw_rp
+  code: LD-NW-RP
+  svg_marker_id: ld_nw_rp
+  room_id: living_dining
+  kind: network
+  label: Wi-Fi repeater
+  label_i18n:
+    en: Wi-Fi repeater
+    de: WLAN-Repeater
+  notes: FRITZ!Repeater 1200 AX (wired)
+  images: []
+- id: laundry.la_cp
+  code: LA-CP
+  svg_marker_id: la_cp
+  room_id: laundry
+  label: Laundry shutter
+  label_i18n:
+    en: Laundry shutter
+    de: Rollladen Duschbad
+  images: []
+- id: laundry.la_re
+  code: LA-RE
+  svg_marker_id: la_re
+  room_id: laundry
+  label: Laundry relay
+  label_i18n:
+    en: Laundry relay
+    de: Relais Duschbad
+  images: []
+- id: home_office.of_cp
+  code: OF-CP
+  svg_marker_id: of_cp
+  room_id: home_office
+  label: Office car park shutter
+  label_i18n:
+    en: Office car park shutter
+    de: Rollladen Büro Stellplatz
+  images: []
+- id: home_office.of_fd
+  code: OF-FD
+  svg_marker_id: of_fd
+  room_id: home_office
+  label: Office front shutter
+  label_i18n:
+    en: Office front shutter
+    de: Rollladen Büro vorne
+  images: []
+- id: home_office.of_sw
+  code: OF-SW
+  svg_marker_id: of_sw
+  room_id: home_office
+  label: Home office switch
+  label_i18n:
+    en: Home office switch
+    de: Home-Office Schalter
+  notes: Switch-MasterBedroom (legacy name).
+  images: []
+- id: home_office.of_nw_sv
+  code: OF-NW-SV
+  svg_marker_id: of_nw_sv
+  room_id: home_office
+  kind: network
+  label: Home Assistant server
+  label_i18n:
+    en: Home Assistant server
+    de: Home-Assistant-Server
+  notes: Kelder host (wired Ethernet)
+  images: []
+- id: master_bedroom.mb_li
+  code: MB-LI
+  svg_marker_id: mb_li
+  room_id: master_bedroom
+  label: Master bedroom globe
+  label_i18n:
+    en: Master bedroom globe
+    de: Kugellampe Hauptschlafzimmer
+  images: []
+- id: master_bedroom.mb_sw
+  code: MB-SW
+  svg_marker_id: mb_sw
+  room_id: master_bedroom
+  label: Master bedroom switch
+  label_i18n:
+    en: Master bedroom switch
+    de: Hauptschlafzimmer Schalter
+  images: []
+- id: master_bedroom.mb_ga
+  code: MB-GA
+  svg_marker_id: mb_ga
+  room_id: master_bedroom
+  label: Master bedroom shutter
+  label_i18n:
+    en: Master bedroom shutter
+    de: Rollladen Hauptschlafzimmer
+  images: []
+- id: second_bedroom.br_sw
+  code: BR-SW
+  svg_marker_id: br_sw
+  room_id: second_bedroom
+  label: Bedroom switch
+  label_i18n:
+    en: Bedroom switch
+    de: Schlafzimmer Schalter
+  images: []
+- id: second_bedroom.br_li
+  code: BR-LI
+  svg_marker_id: br_li
+  room_id: second_bedroom
+  label: Bedroom globe
+  label_i18n:
+    en: Bedroom globe
+    de: Kugellampe Schlafzimmer
+  images: []
+- id: second_bedroom.br_ga
+  code: BR-GA
+  svg_marker_id: br_ga
+  room_id: second_bedroom
+  label: Bedroom shutter
+  label_i18n:
+    en: Bedroom shutter
+    de: Rollladen Schlafzimmer
+  images: []
+- id: bathroom.ba_re
+  code: BA-RE
+  svg_marker_id: ba_re
+  room_id: bathroom
+  label: Bathroom relay
+  label_i18n:
+    en: Bathroom relay
+    de: Relais Bad
+  images: []
+- id: bathroom.ba_fd
+  code: BA-FD
+  svg_marker_id: ba_fd
+  room_id: bathroom
+  label: Bathroom shutter
+  label_i18n:
+    en: Bathroom shutter
+    de: Rollladen Bad
+  images: []
+- id: storage.st_sw
+  code: ST-SW
+  svg_marker_id: st_sw
+  room_id: storage
+  label: Storage switch
+  label_i18n:
+    en: Storage switch
+    de: Abstellraum Schalter
+  images: []
+- id: hallway.ha_sw
+  code: HA-SW
+  svg_marker_id: ha_sw
+  room_id: hallway
+  label: Hallway dimmer
+  label_i18n:
+    en: Hallway dimmer
+    de: Dimmer Diele
+  images: []
+- id: hallway.ha_nw_nw
+  code: HA-NW-NW
+  svg_marker_id: ha_nw_nw
+  room_id: hallway
+  kind: network
+  label: Network cabinet
+  label_i18n:
+    en: Network cabinet
+    de: Netzwerkverteiler
+  notes: FRITZ!Box router and LittleJerry access point
+  images: []

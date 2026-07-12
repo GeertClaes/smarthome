@@ -4,12 +4,14 @@
     en: Bike Room
     de: Fahrradraum
   floor_id: basement
+  ownership: shared
 - id: gym
   name: "Gym"
   name_i18n:
     en: Gym
     de: Fitnessraum
   floor_id: basement
+  ownership: shared
 - id: bathroom
   name: "Bathroom"
   name_i18n:

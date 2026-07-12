@@ -1,6 +1,8 @@
 import Link from "next/link";
+import PhotoGallery from "@/app/components/PhotoGallery";
 import { getData } from "@/lib/data";
 
+export const dynamic = "force-dynamic";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -22,10 +24,17 @@ export default async function RoomDetailPage({ params }) {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">{currentRoom.name}</h1>
-        <p className="text-base-content/70">Physical install and served-output split view.</p>
+      <div className="flex justify-between items-start gap-3 flex-wrap">
+        <div>
+          <h1 className="text-3xl font-bold">{currentRoom.name}</h1>
+          <p className="text-base-content/70">Physical install and served-output split view.</p>
+        </div>
+        <Link href={`/admin/rooms/${currentRoom.id}/edit`} className="btn btn-sm btn-outline">
+          Edit room
+        </Link>
       </div>
+
+      <PhotoGallery images={currentRoom.images} altPrefix={currentRoom.name} />
 
       <section className="card bg-base-100 shadow">
         <div className="card-body">

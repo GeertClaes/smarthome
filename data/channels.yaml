@@ -1,216 +1,192 @@
 - id: ch_shutter_office_1_1
   device_id: shutter_office_1
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: home_office_schlafen
   type: cover
 - id: ch_shutter_office_2_1
   device_id: shutter_office_2
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: home_office_schlafen
   type: cover
 - id: ch_shutter_bedroom_a_1
   device_id: shutter_bedroom_a
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: master_bedroom_zimmer_1
   type: cover
 - id: ch_shutter_bedroom_b_1
   device_id: shutter_bedroom_b
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: second_bedroom_zimmer_2
   type: cover
 - id: ch_shutter_laundry_1
   device_id: shutter_laundry
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: duschbad_utility_bathroom
   type: cover
 - id: ch_shutter_kitchenbench_1
   device_id: shutter_kitchenbench
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: kitchen_kueche
   type: cover
 - id: ch_shutter_kitchen_1
   device_id: shutter_kitchen
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: kitchen_kueche
   type: cover
 - id: ch_shutter_garden_1
   device_id: shutter_garden
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: garden_exterior_not_on_interior_floorplan
   type: cover
 - id: ch_shutter_carpark_1
   device_id: shutter_carpark
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: car_park_exterior_not_on_interior_floorplan
   type: cover
 - id: ch_shutter_bathroom_1
   device_id: shutter_bathroom
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: bathroom_bad
-  type: cover
-- id: ch_shutter_backgate_1
-  device_id: shutter_backgate
-  channel_index: 0
-  controls: "Up/Down"
-  room_id: back_gate_exterior_not_on_interior_floorplan
   type: cover
 - id: ch_shutter_backdeck_1
   device_id: shutter_backdeck
   channel_index: 0
-  controls: "Up/Down"
+  controls: Up/Down
   room_id: back_deck_exterior_not_on_interior_floorplan
   type: cover
 - id: ch_relay_tableandlounge_1
   device_id: relay_tableandlounge
   channel_index: 0
-  controls: "Table light"
+  controls: Table light
   room_id: living_dining_wohnen_essen
   type: switch
 - id: ch_relay_tableandlounge_2
   device_id: relay_tableandlounge
   channel_index: 1
-  controls: "Lounge light"
+  controls: Lounge light
   room_id: living_dining_wohnen_essen
   type: switch
 - id: ch_relay_laundryandfridge_1
   device_id: relay_laundryandfridge
   channel_index: 0
-  controls: "Laundry"
+  controls: Laundry
   room_id: duschbad_utility_bathroom
   type: switch
 - id: ch_relay_laundryandfridge_2
   device_id: relay_laundryandfridge
   channel_index: 1
-  controls: "Fridge"
+  controls: Fridge
   room_id: duschbad_utility_bathroom
   type: switch
 - id: ch_relay_bathroomheatermirror_1
   device_id: relay_bathroomheatermirror
   channel_index: 0
-  controls: "Heater"
+  controls: Heater
   room_id: bathroom_bad
   type: switch
 - id: ch_relay_bathroomheatermirror_2
   device_id: relay_bathroomheatermirror
   channel_index: 1
-  controls: "Mirror light"
+  controls: Mirror light
   room_id: bathroom_bad
   type: switch
 - id: ch_switch_tap_1
   device_id: switch_tap
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: exterior_tap_garden_not_on_interior_floorplan
   type: switch
 - id: ch_switch_storage_1
   device_id: switch_storage
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: storage_abstell
   type: switch
 - id: ch_switch_office_1
   device_id: switch_office
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: master_bedroom_zimmer_1
-  type: switch
-- id: ch_switch_masterbedroom_1
-  device_id: switch_masterbedroom
-  channel_index: 0
-  controls: "Single"
-  room_id: home_office_schlafen
   type: switch
 - id: ch_switch_kitchenled_1
   device_id: switch_kitchenled
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: kitchen_kueche
   type: switch
 - id: ch_dimmer_hallway_1
   device_id: dimmer_hallway
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: hallway_diele
   type: switch
 - id: ch_plug_lamp_1
   device_id: plug_lamp
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: lamp_location
-  type: switch
-- id: ch_plug_dishwasher_1
-  device_id: plug_dishwasher
-  channel_index: 0
-  controls: "Single"
-  room_id: kitchen_kueche
   type: switch
 - id: ch_plug_washingmachine_1
   device_id: plug_washingmachine
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: duschbad_utility_bathroom
   type: switch
 - id: ch_plug_unnamed_1
   device_id: plug_unnamed
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: unknown
   type: switch
 - id: ch_globe_table_1
   device_id: globe_table
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: living_dining_wohnen_essen
   type: light
 - id: ch_globe_lounge_1
   device_id: globe_lounge
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: living_dining_wohnen_essen
   type: light
 - id: ch_led_tvstrip_1
   device_id: led_tvstrip
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: living_dining_wohnen_essen
-  type: light
-- id: ch_globe_loungeright_1
-  device_id: globe_loungeright
-  channel_index: 0
-  controls: "Single"
-  room_id: living_dining_wohnen_essen
-  type: light
-- id: ch_globe_kitchen_1
-  device_id: globe_kitchen
-  channel_index: 0
-  controls: "Single"
-  room_id: kitchen_kueche
-  type: light
-- id: ch_globe_masterbedroom_1
-  device_id: globe_masterbedroom
-  channel_index: 0
-  controls: "Single"
-  room_id: home_office_schlafen
-  type: light
-- id: ch_led_cabinet_1
-  device_id: led_cabinet
-  channel_index: 0
-  controls: "Single"
-  room_id: cabinet
   type: light
 - id: ch_wiz_kitchen_1
   device_id: wiz_kitchen
   channel_index: 0
-  controls: "Single"
+  controls: Single
   room_id: kitchen_kueche
+  type: light
+- id: ch_shutter_backgate_1
+  device_id: shutter_backgate
+  channel_index: 0
+  controls: Up/Down
+  room_id: living_dining
+  type: cover
+- id: ch_switch_masterbedroom_1
+  device_id: switch_masterbedroom
+  channel_index: 0
+  controls: Single
+  room_id: home_office
+  type: switch
+- id: ch_globe_masterbedroom_1
+  device_id: globe_masterbedroom
+  channel_index: 0
+  controls: Single
+  room_id: home_office
   type: light

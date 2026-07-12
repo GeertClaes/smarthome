@@ -1,0 +1,25 @@
+- id: gesamtbrochure
+  title: Property Brochure
+  title_i18n:
+    en: Property Brochure
+    de: Gesamtbroschüre
+  description: Full development brochure received at purchase, covering the building and apartment.
+  description_i18n:
+    en: Full development brochure received at purchase, covering the building and apartment.
+    de: Gesamtbroschüre aus dem Kauf, mit Informationen zum Gebäude und zur Wohnung.
+  file: /docs/gesamtbrochure.pdf
+  icon: fa-book
+  category: purchase
+
+- id: expose_etw
+  title: Apartment Exposé
+  title_i18n:
+    en: Apartment Exposé
+    de: Exposé ETW
+  description: Original apartment exposé with layout, specifications, and sales details.
+  description_i18n:
+    en: Original apartment exposé with layout, specifications, and sales details.
+    de: Originales Wohnungs-Exposé mit Grundriss, Ausstattung und Verkaufsdetails.
+  file: /docs/expose-etw.pdf
+  icon: fa-file-lines
+  category: purchase

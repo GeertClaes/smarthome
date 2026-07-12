@@ -1,0 +1,204 @@
+# SVG layer naming — language-neutral room and point codes
+#
+# Room shapes use room_{code} where code is a two-letter zone id.
+# Device point groups use points_{code}; individual points use {code}_{suffix}.
+# Human-readable names live only in the app (rooms.yaml, device_points.yaml, i18n).
+#
+# Zone codes (ground floor):
+#   of — north-west (home office)
+#   ba — north-centre (bathroom)
+#   la — west strip (laundry)
+#   ha — central core (hallway)
+#   mb — east large room (master bedroom)
+#   br — south-centre (second bedroom)
+#   ld — south-west large room (living/dining)
+#   st — pantry cell (storage)
+#
+# Point suffix examples:
+#   cp car park, fd front, ga garden, ba back deck, lo lounge, ta table, la lamp,
+#   si sink, wz wizz, ki kitchen, kb kitchen bench, tv TV, re relay, li light, sw switch
+
+schema:
+  room_pattern: "room_{code}"
+  point_group_pattern: "points_{code}"
+  point_shape_pattern: "{code}_{suffix}"
+  display_code_pattern: "{CODE}-{SUFFIX}" # e.g. LD-CP
+
+rooms:
+  - svg_id: room_of
+    legacy_id: Office
+    app_room_id: home_office
+  - svg_id: room_ba
+    legacy_id: Bathroom
+    app_room_id: bathroom
+  - svg_id: room_la
+    legacy_id: Laundry
+    app_room_id: laundry
+  - svg_id: room_ha
+    legacy_id: Hallway
+    app_room_id: hallway
+  - svg_id: room_mb
+    legacy_id: MasterBedroom
+    app_room_id: master_bedroom
+  - svg_id: room_br
+    legacy_id: Bedroom
+    app_room_id: second_bedroom
+  - svg_id: room_ld
+    legacy_id: FamilyRoom
+    app_room_id: living_dining
+  - svg_id: room_st
+    legacy_id: Storage
+    app_room_id: storage
+
+point_groups:
+  - svg_id: points_of
+    legacy_id: Devices-Office
+    app_room_id: home_office
+  - svg_id: points_ba
+    legacy_id: Devices-Bathroom
+    app_room_id: bathroom
+  - svg_id: points_la
+    legacy_id: Devices-Laundry
+    app_room_id: laundry
+  - svg_id: points_ha
+    legacy_id: Devices-Hallway
+    app_room_id: hallway
+  - svg_id: points_mb
+    legacy_id: Devices-MasterBedroom
+    app_room_id: master_bedroom
+  - svg_id: points_br
+    legacy_id: Devices-Bedroom
+    app_room_id: second_bedroom
+  - svg_id: points_ld
+    legacy_id: Devices-FamilyRoom
+    app_room_id: living_dining
+  - svg_id: points_st
+    legacy_id: Devices-Storage
+    app_room_id: storage
+
+device_points:
+  # living/dining (room_ld)
+  - svg_id: ld_cp
+    display_code: LD-CP
+    legacy_id: ShutterCarPark
+    app_room_id: living_dining
+  - svg_id: ld_lo
+    display_code: LD-LO
+    legacy_id: GlobeLounge
+    app_room_id: living_dining
+  - svg_id: ld_ta
+    display_code: LD-TA
+    legacy_id: GlobeTable
+    app_room_id: living_dining
+  - svg_id: ld_si
+    display_code: LD-SI
+    legacy_id: SwitchSink
+    app_room_id: living_dining
+  - svg_id: ls_wa
+    display_code: LS-WA
+    legacy_id: SwitchLEDKitchen
+    app_room_id: living_dining
+  - svg_id: ld_wz
+    display_code: LD-WZ
+    legacy_id: null
+    app_room_id: living_dining
+  - svg_id: ld_ki
+    display_code: LD-KI
+    legacy_id: null
+    app_room_id: living_dining
+  - svg_id: ld_kb
+    display_code: LD-KB
+    legacy_id: null
+    app_room_id: living_dining
+  - svg_id: ld_tv
+    display_code: LD-TV
+    legacy_id: SwitchLEDTV
+    app_room_id: living_dining
+  - svg_id: ld_re
+    display_code: LD-RE
+    legacy_id: RelayHub
+    app_room_id: living_dining
+  - svg_id: ld_ga
+    display_code: LD-GA
+    legacy_id: ShutterGarden
+    app_room_id: living_dining
+  - svg_id: ld_ba
+    display_code: LD-BA
+    legacy_id: ShutterBack
+    app_room_id: living_dining
+  - svg_id: ld_la
+    display_code: LD-LA
+    legacy_id: PlugLamp
+    app_room_id: living_dining
+  # laundry (room_la)
+  - svg_id: la_cp
+    display_code: LA-CP
+    legacy_id: ShutterLaundry
+    app_room_id: laundry
+  - svg_id: la_re
+    display_code: LA-RE
+    legacy_id: RelayLaundry
+    app_room_id: laundry
+  # home office (room_of)
+  - svg_id: of_cp
+    display_code: OF-CP
+    legacy_id: ShutterOfficeCarPark
+    app_room_id: home_office
+  - svg_id: of_fd
+    display_code: OF-FD
+    legacy_id: ShutterOfficeFront
+    app_room_id: home_office
+  - svg_id: of_sw
+    display_code: OF-SW
+    legacy_id: SwitchMasterBedroom
+    app_room_id: home_office
+  # master bedroom (room_mb)
+  - svg_id: mb_li
+    display_code: MB-LI
+    legacy_id: GlobeMasterBedroom
+    app_room_id: master_bedroom
+  - svg_id: mb_sw
+    display_code: MB-SW
+    legacy_id: SwitchOffice
+    app_room_id: master_bedroom
+  - svg_id: mb_ga
+    display_code: MB-GA
+    legacy_id: ShutterMasterBedroom
+    app_room_id: master_bedroom
+  # second bedroom (room_br)
+  - svg_id: br_sw
+    display_code: BR-SW
+    legacy_id: SwitchBedroom
+    app_room_id: second_bedroom
+  - svg_id: br_li
+    display_code: BR-LI
+    legacy_id: GlobeBedroom
+    app_room_id: second_bedroom
+  - svg_id: br_ga
+    display_code: BR-GA
+    legacy_id: ShutterBedroom
+    app_room_id: second_bedroom
+  # bathroom (room_ba)
+  - svg_id: ba_re
+    display_code: BA-RE
+    legacy_id: RelayBathroom
+    app_room_id: bathroom
+  - svg_id: ba_fd
+    display_code: BA-FD
+    legacy_id: ShutterBathroom
+    app_room_id: bathroom
+  # storage (room_st)
+  - svg_id: st_sw
+    display_code: ST-SW
+    legacy_id: SwitchStorage
+    app_room_id: storage
+  # hallway (room_ha)
+  - svg_id: ha_sw
+    display_code: HA-SW
+    legacy_id: SwitchDimmerHallway
+    app_room_id: hallway
+
+# Basement (when you add SVG points later):
+#   bm_r01 — server / property zone (teal on Basement.png)
+#   bm_r02 — shared gym (purple)
+#   bm_r03 — shared bike room (yellow)

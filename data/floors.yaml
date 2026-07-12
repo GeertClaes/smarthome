@@ -3,12 +3,60 @@
   name_i18n:
     en: Ground Floor
     de: Erdgeschoss
+  summary: Apartment 4.2, entrance, and garden.
+  summary_i18n:
+    en: Apartment 4.2, entrance, and garden.
+    de: Wohnung 4.2, Eingang und Garten.
+  overview_hint_i18n:
+    en: Select a floor on the building diagram. Teal areas — including the garden — belong to property 4.2.
+    de: Stockwerk im Gebäude wählen. Türgrüne Bereiche — einschließlich Garten — gehören zu Objekt 4.2.
   floorplan_image: /floorplans/GroundFloor.png
   floorplan_svg: /floorplans/FloorMap.svg
+  map_legend:
+    - id: property
+      color: "#BEEDE4"
+      stroke: "#0B8A80"
+      label: Property 4.2
+      label_i18n:
+        en: Property 4.2
+        de: Objekt 4.2
 - id: basement
   name: Basement
   name_i18n:
     en: Basement
     de: Keller
+  summary: Gym, and shared bike storage.
+  summary_i18n:
+    en: Gym, and shared bike storage.
+    de: Fitnessraum und gemeinsamer Fahrradraum.
+  overview_hint_i18n:
+    en: >-
+      Teal is property 4.2 (including garden access from the ground floor). Purple and yellow spaces are shared with
+      other owners in the building.
+    de: >-
+      Türgrün ist Objekt 4.2 (einschließlich Gartenzugang vom Erdgeschoss). Lila und gelb markierte Bereiche sind mit
+      anderen Eigentümern gemeinsam genutzt.
   floorplan_image: /floorplans/Basement.png
   floorplan_svg: ""
+  map_legend:
+    - id: property
+      color: "#B8EDE8"
+      stroke: "#0B8A80"
+      label: Property 4.2
+      label_i18n:
+        en: Property 4.2
+        de: Objekt 4.2
+    - id: bike_room
+      color: "#F0E4A8"
+      stroke: "#C9B84A"
+      label: Bike Room
+      label_i18n:
+        en: Bike Room
+        de: Fahrradraum
+    - id: gym
+      color: "#C4B0E0"
+      stroke: "#8B6BB8"
+      label: Gym
+      label_i18n:
+        en: Gym
+        de: Fitnessraum

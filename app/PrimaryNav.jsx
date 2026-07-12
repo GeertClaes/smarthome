@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 import { useI18n } from "./LanguageProvider";
 
 const navItems = [
-  { href: "/", labelKey: "nav.building" },
-  { href: "/floorplan", labelKey: "nav.floorPlan" },
+  { href: "/", labelKey: "nav.building", icon: "fa-building" },
+  { href: "/floorplan", labelKey: "nav.floorPlan", icon: "fa-map" },
+  { href: "/docs", labelKey: "nav.docs", icon: "fa-folder-open" },
 ];
 
 function isActive(pathname, href) {
@@ -17,12 +18,12 @@ function isActive(pathname, href) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export default function PrimaryNav() {
+export default function PrimaryNav({ className = "" }) {
   const pathname = usePathname();
   const { t } = useI18n();
 
   return (
-    <div className="nav-strip nav-strip-center">
+    <nav className={`primary-nav ${className}`} aria-label="Main">
       {navItems.map((item) => {
         const active = isActive(pathname, item.href);
 
@@ -30,13 +31,14 @@ export default function PrimaryNav() {
           <Link
             key={item.href}
             href={item.href}
-            className={`nav-pill ${active ? "is-active" : ""}`}
+            className={`primary-nav-link ${active ? "is-active" : ""}`}
             aria-current={active ? "page" : undefined}
           >
+            <i className={`fa-solid ${item.icon}`} aria-hidden="true" />
             {t(item.labelKey)}
           </Link>
         );
       })}
-    </div>
+    </nav>
   );
 }

@@ -2,13 +2,13 @@
 <g id="FloorMap">
 <g id="Rooms">
 <path id="Storage" d="M349.43 300.97H297.624V260.303H349.43V300.97Z" fill="#BEEDE4"/>
-<path id="Hallway" d="M417.888 300.97H354.981V249.212H345.73V243.667H303.175V249.212H231.017V178.97H417.888V300.97Z" fill="#BEEDE4"/>
-<path id="MasterBedroom" d="M551.104 452.545H423.439V260.303H510.399V328.697H551.104V452.545Z" fill="#BEEDE4"/>
-<path id="Laundry" d="M225.466 178.97V249.212H136.656V208.545H131.106V249.212H97.8018V178.97H225.466Z" fill="#BEEDE4"/>
-<path id="Office" d="M97.8018 173.424V34.7878H282.823V173.424H97.8018Z" fill="#BEEDE4"/>
-<path id="Bathroom" d="M293.923 34.7878V173.424H417.887V34.7878H380.883V73.606H366.081V34.7878H293.923Z" fill="#BEEDE4"/>
-<path id="Bedroom" d="M297.624 306.515V452.545H417.888V306.515H297.624Z" fill="#BEEDE4"/>
-<path id="FamilyRoom" d="M97.8018 615.212H343.88V463.636H286.523V260.303H231.017V284.333H225.466V260.303H97.8018V615.212Z" fill="#BEEDE4"/>
+<path id="room_ha" d="M417.888 300.97H354.981V249.212H345.73V243.667H303.175V249.212H231.017V178.97H417.888V300.97Z" fill="#BEEDE4"/>
+<path id="room_mb" d="M551.104 452.545H423.439V260.303H510.399V328.697H551.104V452.545Z" fill="#BEEDE4"/>
+<path id="room_la" d="M225.466 178.97V249.212H136.656V208.545H131.106V249.212H97.8018V178.97H225.466Z" fill="#BEEDE4"/>
+<path id="room_of" d="M97.8018 173.424V34.7878H282.823V173.424H97.8018Z" fill="#BEEDE4"/>
+<path id="room_ba" d="M293.923 34.7878V173.424H417.887V34.7878H380.883V73.606H366.081V34.7878H293.923Z" fill="#BEEDE4"/>
+<path id="room_br" d="M297.624 306.515V452.545H417.888V306.515H297.624Z" fill="#BEEDE4"/>
+<path id="room_ld" d="M97.8018 615.212H343.88V463.636H286.523V260.303H231.017V284.333H225.466V260.303H97.8018V615.212Z" fill="#BEEDE4"/>
 </g>
 <g id="GroundFloor">
 <g id="Walls">
@@ -60,6 +60,55 @@
 <path d="M83 284.333H97.8017V317.606H83V284.333Z" fill="#E2E2E2"/>
 <path d="M83 328.697H97.8017V361.97H83V328.697Z" fill="#E2E2E2"/>
 <path d="M360.533 20.0002V34.7881L303.177 34.7881V20.0002L360.533 20.0002Z" fill="#E2E2E2"/>
+</g>
+</g>
+<g id="Points">
+<g id="points_ld">
+<circle id="ld_cp" cx="104" cy="510" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_lo" cx="269" cy="532" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_ta" cx="170" cy="418" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_si" cx="177" cy="266" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_wz" cx="180" cy="316" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ls_wa" cx="113" cy="270" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_ki" cx="104" cy="310" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_kb" cx="104" cy="361" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_tv" cx="334" cy="480" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_re" cx="246" cy="270" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_ga" cx="339" cy="517" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_ba" cx="185" cy="607" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_la" cx="114" cy="597" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<rect id="ld_nw_rp" x="99" y="433" width="20" height="20" rx="4" fill="#69B731"/>
+</g>
+<g id="points_la">
+<circle id="la_cp" cx="104" cy="188" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="la_re" cx="210" cy="218" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+</g>
+<g id="points_of">
+<circle id="of_cp" cx="104" cy="89" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="of_fd" cx="215" cy="44" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="of_sw" cx="210" cy="164" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<rect id="of_nw_sv" x="256" y="74" width="20" height="20" rx="4" fill="#69B731"/>
+</g>
+<g id="points_mb">
+<circle id="mb_li" cx="487" cy="371" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="mb_sw" cx="443" cy="316" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="mb_ga" cx="443" cy="448" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+</g>
+<g id="points_br">
+<circle id="br_sw" cx="356" cy="322" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="br_li" cx="349" cy="376" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="br_ga" cx="369" cy="448" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+</g>
+<g id="points_ba">
+<circle id="ba_re" cx="385.561" cy="158.561" r="13.0609" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ba_fd" cx="353.561" cy="49.5609" r="13.0609" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+</g>
+<g id="points_st">
+<circle id="st_sw" cx="334.561" cy="275.561" r="13.0609" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+</g>
+<g id="points_ha">
+<circle id="ha_sw" cx="245.561" cy="193.561" r="13.0609" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<rect id="ha_nw_nw" x="314" y="229" width="20" height="20" rx="4" fill="#69B731"/>
 </g>
 </g>
 </g>

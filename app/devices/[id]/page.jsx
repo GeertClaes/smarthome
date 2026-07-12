@@ -1,5 +1,8 @@
+import Link from "next/link";
+import PhotoGallery from "@/app/components/PhotoGallery";
 import { getData } from "@/lib/data";
 
+export const dynamic = "force-dynamic";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -27,9 +30,14 @@ export default async function DeviceDetailPage({ params }) {
         <div className="space-y-4">
           <div className="flex justify-between items-start gap-3 flex-wrap">
             <h1 className="text-3xl md:text-5xl font-bold">{device.name}</h1>
-            <span className={`status-pill ${online ? "is-online" : "is-offline"}`}>
-              {device.status}
-            </span>
+            <div className="flex items-center gap-2 flex-wrap">
+              <Link href={`/admin/devices/${device.id}/edit`} className="btn btn-sm btn-outline">
+                Edit
+              </Link>
+              <span className={`status-pill ${online ? "is-online" : "is-offline"}`}>
+                {device.status}
+              </span>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-3 text-sm rounded-xl border border-base-300 bg-base-100 p-4">
@@ -58,6 +66,8 @@ export default async function DeviceDetailPage({ params }) {
               <strong>Notes:</strong> {device.notes}
             </p>
           ) : null}
+
+          <PhotoGallery images={device.images} altPrefix={device.name} />
         </div>
       </section>
 

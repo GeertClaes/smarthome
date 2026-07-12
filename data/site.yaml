@@ -1,0 +1,42 @@
+meta:
+  title_i18n:
+    en: JWS11 — Property 4.2
+    de: JWS11 — Objekt 4.2
+  description_i18n:
+    en: Device, channel, and installation documentation for JWS11 property 4.2
+    de: Geräte-, Kanal- und Installationsdokumentation für JWS11 Objekt 4.2
+header:
+  title_i18n:
+    en: JWS11
+    de: JWS11
+  subtitle_i18n:
+    en: Property 4.2 documentation
+    de: Objekt 4.2 — Dokumentation
+home:
+  overview_title_i18n:
+    en: Building Overview
+    de: Gebäude-Übersicht
+  overview_subtitle_i18n:
+    en: Select a floor on the building diagram to view its plan. Teal rooms belong to this apartment.
+    de: Wählen Sie eine Etage im Gebäudiagramm, um den Grundriss anzuzeigen. Türgrüne Räume gehören zu dieser Wohnung.
+docs:
+  title_i18n:
+    en: Documents
+    de: Unterlagen
+  subtitle_i18n:
+    en: Smart home setup guide and original property documents from purchase and handover.
+    de: Smart-Home-Anleitung und Originalunterlagen aus Kauf und Übergabe.
+  guide:
+    title_i18n:
+      en: Smart home & Alexa
+      de: Smart Home & Alexa
+    subtitle_i18n:
+      en: Network, Home Assistant, Shelly Cloud, and Amazon Alexa voice control.
+      de: Netzwerk, Home Assistant, Shelly Cloud und Sprachsteuerung mit Amazon Alexa.
+  pdfs:
+    title_i18n:
+      en: Property documents
+      de: Immobilienunterlagen
+    subtitle_i18n:
+      en: Original PDFs from purchase and handover.
+      de: Original-PDFs aus Kauf und Übergabe.
