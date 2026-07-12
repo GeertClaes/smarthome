@@ -1,0 +1,14 @@
+services:
+  smarthome:
+    build: .
+    container_name: smarthome
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+    volumes:
+      # Persist admin edits (devices, rooms, floor plan points, etc.)
+      - ./data:/app/data
+      # Persist uploaded photos
+      - ./public/uploads:/app/public/uploads
