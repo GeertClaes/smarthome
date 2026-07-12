@@ -4,7 +4,8 @@ services:
     container_name: smarthome
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      # Host 8124 — next to Home Assistant (8123); container still listens on 3000
+      - "8124:3000"
     environment:
       ADMIN_TOKEN: ${ADMIN_TOKEN:-}
     volumes:
