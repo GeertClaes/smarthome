@@ -12,7 +12,6 @@ import {
   formatDeviceOptionLabel,
   sortDevicesForPicker,
 } from "@/lib/deviceAssignment";
-import { getDevicePointLabel } from "@/lib/devicePoints";
 import DeviceChannelsEditor from "./DeviceChannelsEditor";
 
 const CREATE_NEW = "__new__";
@@ -226,7 +225,7 @@ export default function FloorPlanMarkerEditor({
     );
   }
 
-  const pointLabel = point ? getDevicePointLabel(point, tl) : null;
+  const pointLabel = point?.svg_marker_id ?? markerId ?? null;
   const assigningExisting = isCreate && assignDeviceId !== CREATE_NEW && Boolean(assignDeviceId);
 
   return (

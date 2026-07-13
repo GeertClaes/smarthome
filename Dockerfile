@@ -19,6 +19,8 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
+ENV DATA_DIR=/app/runtime-data
+ENV SEED_DATA_DIR=/app/data
 
 RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs
@@ -28,8 +30,8 @@ COPY --from=builder /app/data ./data
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-RUN mkdir -p public/uploads \
-  && chown -R nextjs:nodejs public/uploads data
+RUN mkdir -p public/uploads runtime-data \
+  && chown -R nextjs:nodejs public/uploads data runtime-data
 
 USER nextjs
 

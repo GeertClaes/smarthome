@@ -6,16 +6,14 @@ import { getDevicePointsRaw, saveDevicePoints } from "@/lib/dataStore";
 export const dynamic = "force-dynamic";
 
 function normalizePointPayload(payload, existingId) {
+  const { label, label_i18n, ...rest } = payload;
+
   return {
+    ...rest,
     id: existingId,
-    code: payload.code?.trim() || existingId,
+    code: payload.code?.trim() || payload.svg_marker_id || existingId,
     svg_marker_id: payload.svg_marker_id,
     room_id: payload.room_id,
-    label: payload.label?.trim() || payload.code || existingId,
-    label_i18n: {
-      en: payload.label_i18n?.en?.trim() || payload.label?.trim() || existingId,
-      de: payload.label_i18n?.de?.trim() || payload.label?.trim() || existingId,
-    },
     notes: payload.notes?.trim() || "",
     images: Array.isArray(payload.images) ? payload.images : [],
   };

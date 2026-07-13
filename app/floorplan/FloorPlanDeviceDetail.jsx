@@ -3,13 +3,10 @@
 import { useI18n } from "@/app/LanguageProvider";
 import { getDeviceIcon, toDeviceTypeKey } from "@/lib/devicePresentation";
 import { findDeviceModelByName } from "@/lib/deviceModels";
-import { getDevicePointLabel } from "@/lib/devicePoints";
 
 export default function FloorPlanDeviceDetail({
   device,
   room,
-  point,
-  devicePoints = [],
   deviceModels = [],
   deviceTypeById,
   channels,
@@ -27,12 +24,6 @@ export default function FloorPlanDeviceDetail({
   }
 
   const typeKey = toDeviceTypeKey(device.device_type);
-  const mappedPoint =
-    point ??
-    (device.floorplan_marker_id
-      ? devicePoints.find((entry) => entry.svg_marker_id === device.floorplan_marker_id)
-      : null);
-  const pointLabel = mappedPoint ? getDevicePointLabel(mappedPoint, tl) : null;
   const catalogModel = findDeviceModelByName(deviceModels, device.model);
   const deviceChannels = channels.filter((channel) => channel.device_id === device.id);
 
@@ -67,10 +58,6 @@ export default function FloorPlanDeviceDetail({
       </div>
 
       <dl className="floorplan-detail-grid">
-        <div>
-          <dt>{t("floorplan.detail.point")}</dt>
-          <dd>{pointLabel ?? t("floorplan.pointUnknown")}</dd>
-        </div>
         <div>
           <dt>{t("floorplan.detail.model")}</dt>
           <dd>

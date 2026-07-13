@@ -6,8 +6,15 @@ services:
     ports:
       # Host 8124 — next to Home Assistant (8123); container still listens on 3000
       - "8124:3000"
+    environment:
+      # Runtime data is written here (can be absolute path outside repo)
+      DATA_DIR: /app/runtime-data
+      # Seed data is read-only defaults copied on first access when runtime files are missing
+      SEED_DATA_DIR: /app/data-seed
     volumes:
-      # Persist admin edits (devices, rooms, floor plan points, etc.)
-      - ./data:/app/data
-      # Persist uploaded photos
-      - ./public/uploads:/app/public/uploads
+      # Persist admin edits outside tracked source data
+      - ${SMARTHOME_DATA_DIR:-./runtime-data}:/app/runtime-data
+      # Read-only seed defaults from repository data files
+      - ${SMARTHOME_SEED_DATA_DIR:-./data}:/app/data-seed:ro
+      # Persist uploaded photos outside tracked source tree
+      - ${SMARTHOME_UPLOADS_DIR:-./runtime-uploads}:/app/public/uploads

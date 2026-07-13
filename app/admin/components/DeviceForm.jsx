@@ -6,7 +6,6 @@ import { useState } from "react";
 import DevicePointSelect from "./DevicePointSelect";
 import DeviceModelSelect from "./DeviceModelSelect";
 import { adminFetch } from "@/lib/adminClient";
-import { getDevicePointLabel } from "@/lib/devicePoints";
 import PhotoUpload from "./PhotoUpload";
 
 const emptyDevice = {
@@ -190,7 +189,7 @@ export default function DeviceForm({ device, rooms, deviceTypes, deviceModels = 
 
             {selectedPoint ? (
               <p className="admin-field-hint admin-field-full">
-                Map label: {getDevicePointLabel(selectedPoint, (value, fallback) => value?.en ?? fallback)}
+                Map marker: {selectedPoint.svg_marker_id}
                 {form.floorplan_marker_id ? (
                   <>
                     {" · "}

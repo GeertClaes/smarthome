@@ -5,10 +5,9 @@ import { useRouter } from "next/navigation";
 import { useI18n } from "@/app/LanguageProvider";
 import PhotoUpload from "@/app/admin/components/PhotoUpload";
 import { adminFetch } from "@/lib/adminClient";
-import { getDevicePointLabel } from "@/lib/devicePoints";
 
 export default function FloorPlanPointEditor({ point, onSaved, onCancel }) {
-  const { t, tl } = useI18n();
+  const { t } = useI18n();
   const router = useRouter();
   const [form, setForm] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -20,14 +19,20 @@ export default function FloorPlanPointEditor({ point, onSaved, onCancel }) {
       return;
     }
 
-    setForm({
-      ...point,
-      label_i18n: {
-        en: point.label_i18n?.en ?? point.label ?? "",
-        de: point.label_i18n?.de ?? point.label ?? "",
-      },
+    const next = {
+      id: point.id,
+      code: point.code ?? point.svg_marker_id ?? point.id,
+      svg_marker_id: point.svg_marker_id,
+      room_id: point.room_id,
+      notes: point.notes ?? "",
       images: point.images ?? [],
-    });
+    };
+
+    if (point.kind) {
+      next.kind = point.kind;
+    }
+
+    setForm(next);
   }, [point]);
 
   if (!form) {
@@ -57,44 +62,13 @@ export default function FloorPlanPointEditor({ point, onSaved, onCancel }) {
   return (
     <form className="floorplan-inline-editor" onSubmit={handleSave}>
       <header className="floorplan-inline-editor-head">
-        <div>
-          <p className="floorplan-inline-editor-kicker">{t("floorplan.inspector.point")}</p>
-          <h2 className="floorplan-inline-editor-title">{getDevicePointLabel(point, tl)}</h2>
-        </div>
+        <div aria-hidden="true" />
         <button type="button" className="floorplan-icon-btn" onClick={onCancel} aria-label={t("floorplan.edit.cancel")}>
           <i className="fa-solid fa-xmark" aria-hidden="true" />
         </button>
       </header>
 
       <div className="floorplan-editor-form">
-        <label className="floorplan-editor-field">
-          <span>{t("floorplan.points.label")}</span>
-          <input value={form.label} onChange={(event) => setForm({ ...form, label: event.target.value })} />
-        </label>
-        <label className="floorplan-editor-field">
-          <span>{t("floorplan.room.nameEn")}</span>
-          <input
-            value={form.label_i18n.en}
-            onChange={(event) =>
-              setForm((current) => ({
-                ...current,
-                label_i18n: { ...current.label_i18n, en: event.target.value },
-              }))
-            }
-          />
-        </label>
-        <label className="floorplan-editor-field">
-          <span>{t("floorplan.room.nameDe")}</span>
-          <input
-            value={form.label_i18n.de}
-            onChange={(event) =>
-              setForm((current) => ({
-                ...current,
-                label_i18n: { ...current.label_i18n, de: event.target.value },
-              }))
-            }
-          />
-        </label>
         <label className="floorplan-editor-field floorplan-editor-field-full">
           <span>{t("floorplan.detail.notes")}</span>
           <textarea

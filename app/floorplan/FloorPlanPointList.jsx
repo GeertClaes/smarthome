@@ -1,7 +1,7 @@
 "use client";
 
 import { useI18n } from "@/app/LanguageProvider";
-import { getDevicePointLabel, isNetworkPoint } from "@/lib/devicePoints";
+import { isNetworkPoint } from "@/lib/devicePoints";
 import { getDeviceIcon } from "@/lib/devicePresentation";
 
 function EditIconButton({ label, onClick }) {
@@ -32,7 +32,7 @@ export default function FloorPlanPointList({
   onEditPoint,
   onAddDevice,
 }) {
-  const { t, tl } = useI18n();
+  const { t } = useI18n();
 
   if (!points.length) {
     return <p className="floorplan-empty-devices">{t("floorplan.points.none")}</p>;
@@ -58,24 +58,24 @@ export default function FloorPlanPointList({
                 onMouseLeave={() => onHighlightPoint(null)}
               >
                 <span className="floorplan-point-copy">
-                  <span className="floorplan-point-label">{getDevicePointLabel(point, tl)}</span>
-                  <span className="floorplan-point-meta">
-                    {isEmpty
-                      ? t("floorplan.points.empty")
-                      : t("floorplan.points.deviceCount", { count: devicesAtPoint.length })}
-                  </span>
+                  {isEmpty ? (
+                    <span className="floorplan-point-label">{t("floorplan.points.empty")}</span>
+                  ) : (
+                    <span className="floorplan-point-preview-list">
+                      {devicesAtPoint.map((device) => (
+                        <span key={device.id} className="floorplan-point-preview-device">
+                          <i className={`fa-solid ${getDeviceIcon(device.device_type)}`} aria-hidden="true" />
+                          <span className="floorplan-point-device-name">{device.name}</span>
+                        </span>
+                      ))}
+                    </span>
+                  )}
                 </span>
-                {!isEmpty ? (
-                  <span className="floorplan-point-icons" aria-hidden="true">
-                    {devicesAtPoint.slice(0, 3).map((device) => (
-                      <i key={device.id} className={`fa-solid ${getDeviceIcon(device.device_type)}`} />
-                    ))}
-                  </span>
-                ) : (
+                {isEmpty ? (
                   <span className="floorplan-point-empty-icon" aria-hidden="true">
                     <i className={`fa-solid ${isNetwork ? "fa-server" : "fa-circle"}`} />
                   </span>
-                )}
+                ) : null}
               </button>
             </li>
           );
@@ -90,7 +90,7 @@ export default function FloorPlanPointList({
             >
               <header className="floorplan-point-card-head">
                 <button type="button" className="floorplan-point-card-select" onClick={() => onSelectPoint(point)}>
-                  <span className="floorplan-point-label">{getDevicePointLabel(point, tl)}</span>
+                  <span className="floorplan-point-label">{t("floorplan.inspector.devicesAtPoint")}</span>
                   {point.notes ? <span className="floorplan-point-card-note">{point.notes}</span> : null}
                 </button>
                 <EditIconButton label={t("floorplan.detail.editPoint")} onClick={() => onEditPoint(point)} />

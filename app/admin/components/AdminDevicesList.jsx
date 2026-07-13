@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { getDevicePointLabel } from "@/lib/devicePoints";
 
 function statusClass(status) {
   const normalized = String(status || "").toLowerCase();
@@ -31,7 +30,6 @@ export default function AdminDevicesList({ devices, rooms, devicePoints }) {
 
     return devices.filter((device) => {
       const point = device.floorplan_marker_id ? pointByMarker.get(device.floorplan_marker_id) : null;
-      const pointLabel = point ? getDevicePointLabel(point, (value, fallback) => value?.en ?? fallback) : "";
       const haystack = [
         device.name,
         device.current_name,
@@ -39,7 +37,8 @@ export default function AdminDevicesList({ devices, rooms, devicePoints }) {
         device.status,
         roomById[device.installed_room_id]?.name,
         device.installed_location,
-        pointLabel,
+        point?.svg_marker_id,
+        point?.code,
         device.floorplan_marker_id,
       ]
         .filter(Boolean)
@@ -101,8 +100,8 @@ export default function AdminDevicesList({ devices, rooms, devicePoints }) {
                     <td>{device.device_type}</td>
                     <td>{roomById[device.installed_room_id]?.name ?? device.installed_location ?? "—"}</td>
                     <td>
-                      {point ? (
-                        getDevicePointLabel(point, (value, fallback) => value?.en ?? fallback)
+                      {point?.svg_marker_id || device.floorplan_marker_id ? (
+                        point?.svg_marker_id || device.floorplan_marker_id
                       ) : (
                         <span className="admin-table-muted">Not on map</span>
                       )}

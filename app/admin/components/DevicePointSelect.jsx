@@ -1,7 +1,6 @@
 "use client";
 
 import { useI18n } from "@/app/LanguageProvider";
-import { getDevicePointLabel } from "@/lib/devicePoints";
 
 export default function DevicePointSelect({ value, onChange, devicePoints = [], rooms = [], roomId }) {
   const { tl } = useI18n();
@@ -17,7 +16,7 @@ export default function DevicePointSelect({ value, onChange, devicePoints = [], 
         <optgroup label={roomId ? tl(roomById[roomId]?.name_i18n, roomById[roomId]?.name ?? "This room") : "Points"}>
           {pointsForRoom.map((point) => (
             <option key={point.id} value={point.svg_marker_id}>
-              {getDevicePointLabel(point, tl)} ({point.svg_marker_id})
+              {point.svg_marker_id}
             </option>
           ))}
         </optgroup>
@@ -26,7 +25,7 @@ export default function DevicePointSelect({ value, onChange, devicePoints = [], 
         <optgroup label="Other rooms">
           {otherPoints.map((point) => (
             <option key={point.id} value={point.svg_marker_id}>
-              {getDevicePointLabel(point, tl)} — {tl(roomById[point.room_id]?.name_i18n, roomById[point.room_id]?.name ?? point.room_id)}
+              {point.svg_marker_id} — {tl(roomById[point.room_id]?.name_i18n, roomById[point.room_id]?.name ?? point.room_id)}
             </option>
           ))}
         </optgroup>
