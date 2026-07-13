@@ -1,0 +1,20 @@
+# Copy to deploy-kelder.yml after installing a GitHub Actions self-hosted runner on kelder.
+# Repo → Settings → Actions → Runners → New self-hosted runner
+name: Deploy to kelder
+
+on:
+  workflow_run:
+    workflows: [Publish Docker image]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: self-hosted
+    steps:
+      - name: Pull and restart smarthome
+        run: |
+          cd /opt/stacks/smarthome
+          docker compose pull smarthome
+          docker compose up -d smarthome

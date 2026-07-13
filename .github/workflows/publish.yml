@@ -35,13 +35,5 @@ jobs:
             ${{ env.IMAGE }}:latest
             ${{ env.IMAGE }}:${{ github.sha }}
 
-  deploy-kelder:
-    needs: build-and-push
-    if: github.ref == 'refs/heads/main'
-    runs-on: self-hosted
-    steps:
-      - name: Pull and restart smarthome
-        run: |
-          cd /opt/stacks/smarthome
-          docker compose pull smarthome
-          docker compose up -d smarthome
+  # Optional: install a self-hosted runner on kelder, then add deploy-kelder.yml
+  # (see .github/workflows/deploy-kelder.yml.example)
