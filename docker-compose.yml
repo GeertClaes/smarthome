@@ -1,5 +1,6 @@
 services:
   smarthome:
+    image: ghcr.io/geertclaes/smarthome:latest
     build: .
     container_name: smarthome
     restart: unless-stopped

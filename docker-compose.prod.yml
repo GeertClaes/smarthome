@@ -1,0 +1,15 @@
+# Production stack for kelder / Dockge — pull a pre-built image, no git clone required.
+# Copy or symlink this as compose.yaml in /opt/stacks/smarthome
+services:
+  smarthome:
+    image: ghcr.io/geertclaes/smarthome:latest
+    container_name: smarthome
+    restart: unless-stopped
+    ports:
+      - "8124:3000"
+    environment:
+      DATA_DIR: /app/runtime-data
+      SEED_DATA_DIR: /app/data
+    volumes:
+      - ./runtime-data:/app/runtime-data
+      - ./runtime-uploads:/app/public/uploads
