@@ -23,21 +23,23 @@ ENV DATA_DIR=/app/runtime-data
 ENV SEED_DATA_DIR=/app/data
 
 RUN addgroup --system --gid 1001 nodejs \
-  && adduser --system --uid 1001 nextjs
+  && adduser --system --uid 1001 nextjs \
+  && apk add --no-cache su-exec
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/data ./data
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
-RUN mkdir -p public/uploads runtime-data \
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
+  && mkdir -p public/uploads runtime-data \
   && chown -R nextjs:nodejs public/uploads data runtime-data
-
-USER nextjs
 
 EXPOSE 3000
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
   CMD wget -qO- http://127.0.0.1:3000/ >/dev/null || exit 1
 
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["node", "server.js"]
