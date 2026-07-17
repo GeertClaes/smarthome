@@ -1,40 +1,41 @@
-<svg width="650" height="650" viewBox="0 0 650 650" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="650" height="750" viewBox="0 0 650 750" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="FloorMap">
 <g id="Rooms">
-<path id="Storage" d="M349.43 300.97H297.624V260.303H349.43V300.97Z" fill="#BEEDE4"/>
+<path id="room_st" d="M349.43 300.97H297.624V260.303H349.43V300.97Z" fill="#BEEDE4"/>
 <path id="room_ha" d="M417.888 300.97H354.981V249.212H345.73V243.667H303.175V249.212H231.017V178.97H417.888V300.97Z" fill="#BEEDE4"/>
 <path id="room_mb" d="M551.104 452.545H423.439V260.303H510.399V328.697H551.104V452.545Z" fill="#BEEDE4"/>
+<path id="room_bm" d="M487 711H615V519H528.168V587H487V711Z" fill="#BEEDE4"/>
 <path id="room_la" d="M225.466 178.97V249.212H136.656V208.545H131.106V249.212H97.8018V178.97H225.466Z" fill="#BEEDE4"/>
 <path id="room_of" d="M97.8018 173.424V34.7878H282.823V173.424H97.8018Z" fill="#BEEDE4"/>
 <path id="room_ba" d="M293.923 34.7878V173.424H417.887V34.7878H380.883V73.606H366.081V34.7878H293.923Z" fill="#BEEDE4"/>
 <path id="room_br" d="M297.624 306.515V452.545H417.888V306.515H297.624Z" fill="#BEEDE4"/>
 <path id="room_ld" d="M97.8018 615.212H343.88V463.636H286.523V260.303H231.017V284.333H225.466V260.303H97.8018V615.212Z" fill="#BEEDE4"/>
 </g>
-<g id="GroundFloor">
+<g id="Background">
 <g id="Walls">
 <path d="M97.8008 249.212H303V243L346 243.5V249.212H354.98V260.303H97.8008V249.212Z" fill="#919191"/>
 <path d="M297.624 260.303L297.624 463.636H286.522V260.303H297.624Z" fill="#919191"/>
 <path d="M343.878 463.637H297.622L297.622 452.546H343.878V463.637Z" fill="#919191"/>
 <path d="M417.888 178.97L97.8009 178.97L97.8009 173.424L417.888 173.424V178.97Z" fill="#919191"/>
 <path d="M225.465 249.212V178.97H231.016V249.212H225.465Z" fill="#919191"/>
-<path d="M417.888 452.545V260.303H423.438V452.545H417.888Z" fill="#919191"/>
+<path d="M417.888 453.5V260.303H423.438V453L417.888 453.5Z" fill="#919191"/>
 <path d="M349.429 300.97V260.303H354.979V300.97H349.429Z" fill="#919191"/>
 <path d="M417.888 306.515H297.624V300.97L417.888 300.97V306.515Z" fill="#919191"/>
 <path d="M225.465 284.333V260.303H231.016V284.333H225.465Z" fill="#919191"/>
 <path d="M131.103 249.212L131.103 208.546H136.654L136.654 249.212H131.103Z" fill="#919191"/>
 <path d="M510.399 260.303L417.888 260.303L417.888 249.212H510.399V260.303Z" fill="#919191"/>
-<path d="M416.962 249.212V75.4547H429.914V249.212H416.962Z" fill="#919191"/>
+<path d="M417.888 249.212L416.963 75.4549L430.84 75.4549V249.212H417.888Z" fill="#919191"/>
 <path d="M366.081 73.6063V34.7881L380.882 34.7881V73.6063H366.081Z" fill="#919191"/>
 <path d="M282.822 173.425L282.822 34.7883L293.923 34.7883V173.425H282.822Z" fill="#919191"/>
 <path d="M510 329V249H525V329L510 329Z" fill="#919191"/>
 <path d="M566 329H524V314L566 314V329Z" fill="#919191"/>
 <path d="M551 453V329H566L566 453H551Z" fill="#919191"/>
-<path d="M83 615.212H358.682V630H83V615.212Z" fill="#828282"/>
-<path d="M431.765 34.7881L96.8768 34.7881L96.8768 20.0002L431.765 20.0003V34.7881Z" fill="#828282"/>
-<path d="M358.683 452.546V615.212H343.881V452.546H358.683Z" fill="#828282"/>
-<path d="M97.802 20.0003L97.802 615.212L83 615.212L83.0003 20.0003L97.802 20.0003Z" fill="#828282"/>
-<path d="M566 467H359V453H566L566 467Z" fill="#828282"/>
-<path d="M416.963 75.4549V34.7883L431.765 34.7881L431.765 75.4549L416.963 75.4549Z" fill="#828282"/>
+<path d="M83 615.212H358.682V630H83V615.212Z" fill="#919191"/>
+<path d="M430.84 35.5L96.8768 34.7881L96.8768 20.0002H430.84V35.5Z" fill="#919191"/>
+<path d="M358.683 452.546V615.212H343.881V452.546H358.683Z" fill="#919191"/>
+<path d="M97.802 20.0003L97.802 615.212L83 615.212L83.0003 20.0003L97.802 20.0003Z" fill="#919191"/>
+<path d="M566 467L358.683 467.5V452.546L566 453L566 467Z" fill="#919191"/>
+<path d="M416.963 75.4549V34.7883L430.84 35.5V75.4549L416.963 75.4549Z" fill="#919191"/>
 </g>
 <g id="Doors">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M385.047 188.045C385.406 196.419 388.451 205.059 394.39 211.652C399.75 217.601 407.446 221.861 417.59 222.763V222.925H420.588C421.303 222.941 422.03 222.941 422.767 222.925H429.59V184.925L423.44 184.925V184.515H384.586V188.045H385.047ZM417.59 188.045V221.758C407.73 220.861 400.3 216.719 395.133 210.983C389.378 204.595 386.406 196.202 386.048 188.045H417.59Z" fill="#E2E2E2"/>
@@ -66,8 +67,9 @@
 <g id="points_ld">
 <circle id="ld_cp" cx="104" cy="510" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <circle id="ld_lo" cx="269" cy="532" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_ls" cx="180" cy="532" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <circle id="ld_ta" cx="170" cy="418" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
-<circle id="ld_si" cx="177" cy="266" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ld_si" cx="190" cy="270" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <circle id="ld_wz" cx="180" cy="316" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <circle id="ls_wa" cx="113" cy="270" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <circle id="ld_ki" cx="104" cy="310" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
@@ -82,11 +84,13 @@
 <g id="points_la">
 <circle id="la_cp" cx="104" cy="188" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <circle id="la_re" cx="210" cy="218" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="la_wd" cx="192" cy="234" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 </g>
 <g id="points_of">
 <circle id="of_cp" cx="104" cy="89" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <circle id="of_fd" cx="215" cy="44" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <circle id="of_sw" cx="210" cy="164" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="of_li" cx="185" cy="109" r="13.5" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <rect id="of_nw_sv" x="256" y="74" width="20" height="20" rx="4" fill="#69B731"/>
 </g>
 <g id="points_mb">
@@ -101,6 +105,7 @@
 </g>
 <g id="points_ba">
 <circle id="ba_re" cx="385.561" cy="158.561" r="13.0609" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
+<circle id="ba_li" cx="353.561" cy="112.561" r="13.0609" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <circle id="ba_fd" cx="353.561" cy="49.5609" r="13.0609" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 </g>
 <g id="points_st">
@@ -110,6 +115,10 @@
 <circle id="ha_sw" cx="245.561" cy="193.561" r="13.0609" fill="#0B8A80" stroke="#0B8A80" stroke-width="3"/>
 <rect id="ha_nw_nw" x="314" y="229" width="20" height="20" rx="4" fill="#69B731"/>
 </g>
+<g id="points_bm">
 </g>
+</g>
+<path id="Rectangle 69" d="M615 711L615 519L630 519L630 726L472 726L472 711L472 572L513 572L513 504L630 504L630 519L528.5 519L528 587L487 587L487 711L615 711Z" fill="#D3D3D3"/>
+<path id="Door" d="M595.64 554.062C587.036 553.809 578.092 550.744 571.291 544.623C564.849 538.825 560.383 530.331 559.928 519.04L559.819 519.04L559.819 504.04L598.819 504.04L598.819 519.04L598.64 519.04L598.64 554.18L595.64 554.18L595.64 554.062ZM595.64 519.04L561.93 519.04C562.382 529.776 566.621 537.73 572.629 543.137C579.019 548.888 587.468 551.808 595.64 552.061L595.64 519.04Z" fill="#E2E2E2"/>
 </g>
 </svg>

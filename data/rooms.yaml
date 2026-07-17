@@ -12,6 +12,13 @@
     de: Fitnessraum
   floor_id: basement
   ownership: shared
+- id: basement_cellar
+  name: "Basement"
+  name_i18n:
+    en: Basement
+    de: Keller
+  floor_id: basement
+  ownership: private
 - id: bathroom
   name: "Bathroom"
   name_i18n:

@@ -16,6 +16,15 @@
     en: Lounge globe light
     de: Kugellampe Lounge
   images: []
+- id: living_dining.ld_ls
+  code: LD-LS
+  svg_marker_id: ld_ls
+  room_id: living_dining
+  label: Living sofa light
+  label_i18n:
+    en: Living sofa light
+    de: Sofa-Licht Wohnzimmer
+  images: []
 - id: living_dining.ld_ta
   code: LD-TA
   svg_marker_id: ld_ta
@@ -146,6 +155,15 @@
     en: Laundry relay
     de: Relais Duschbad
   images: []
+- id: laundry.la_wd
+  code: LA-WD
+  svg_marker_id: la_wd
+  room_id: laundry
+  label: Washer-Dryer
+  label_i18n:
+    en: Washer-Dryer
+    de: Waschtrockner
+  images: []
 - id: home_office.of_cp
   code: OF-CP
   svg_marker_id: of_cp
@@ -173,6 +191,15 @@
     en: Home office switch
     de: Home-Office Schalter
   notes: Switch-MasterBedroom (legacy name).
+  images: []
+- id: home_office.of_li
+  code: OF-LI
+  svg_marker_id: of_li
+  room_id: home_office
+  label: Home office light
+  label_i18n:
+    en: Home office light
+    de: Home-Office Licht
   images: []
 - id: home_office.of_nw_sv
   code: OF-NW-SV
@@ -247,6 +274,15 @@
   label_i18n:
     en: Bathroom relay
     de: Relais Bad
+  images: []
+- id: bathroom.ba_li
+  code: BA-LI
+  svg_marker_id: ba_li
+  room_id: bathroom
+  label: Bathroom light
+  label_i18n:
+    en: Bathroom light
+    de: Badlicht
   images: []
 - id: bathroom.ba_fd
   code: BA-FD

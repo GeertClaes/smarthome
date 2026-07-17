@@ -37,7 +37,7 @@
       Türgrün ist Objekt 4.2 (einschließlich Gartenzugang vom Erdgeschoss). Lila und gelb markierte Bereiche sind mit
       anderen Eigentümern gemeinsam genutzt.
   floorplan_image: /floorplans/Basement.png
-  floorplan_svg: ""
+  floorplan_svg: /floorplans/FloorMap.svg
   map_legend:
     - id: property
       color: "#B8EDE8"

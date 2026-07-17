@@ -14,9 +14,13 @@
 #   ld — south-west large room (living/dining)
 #   st — pantry cell (storage)
 #
+# Zone codes (basement, same SVG):
+#   bm — private cellar for property 4.2
+#
 # Point suffix examples:
 #   cp car park, fd front, ga garden, ba back deck, lo lounge, ta table, la lamp,
-#   si sink, wz wizz, ki kitchen, kb kitchen bench, tv TV, re relay, li light, sw switch
+#   si sink, wz wizz, ki kitchen, kb kitchen bench, tv TV, re relay, li light, sw switch,
+#   wd washer-dryer, ls living sofa
 
 schema:
   room_pattern: "room_{code}"
@@ -49,6 +53,9 @@ rooms:
   - svg_id: room_st
     legacy_id: Storage
     app_room_id: storage
+  - svg_id: room_bm
+    legacy_id: Basement
+    app_room_id: basement_cellar
 
 point_groups:
   - svg_id: points_of
@@ -75,6 +82,9 @@ point_groups:
   - svg_id: points_st
     legacy_id: Devices-Storage
     app_room_id: storage
+  - svg_id: points_bm
+    legacy_id: Devices-Basement
+    app_room_id: basement_cellar
 
 device_points:
   # living/dining (room_ld)

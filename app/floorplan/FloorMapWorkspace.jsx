@@ -2,15 +2,17 @@ import { getData } from "@/lib/data";
 import { loadSvgFromPublic } from "@/lib/svg";
 import FloorPlanConsole from "./FloorPlanConsole";
 
-const GROUND_FLOOR_SVG_BINDINGS = [
+/** SVG room shapes in FloorMap.svg → app room ids (ground floor + basement). */
+const SVG_ROOM_BINDINGS = [
   { svgId: "room_ld", roomId: "living_dining" },
-  { svgId: "Storage", roomId: "storage" },
+  { svgId: "room_st", roomId: "storage" },
   { svgId: "room_ha", roomId: "hallway" },
   { svgId: "room_mb", roomId: "master_bedroom" },
   { svgId: "room_la", roomId: "laundry" },
   { svgId: "room_of", roomId: "home_office" },
   { svgId: "room_ba", roomId: "bathroom" },
   { svgId: "room_br", roomId: "second_bedroom" },
+  { svgId: "room_bm", roomId: "basement_cellar" },
 ];
 
 export default function FloorMapWorkspace() {
@@ -21,7 +23,8 @@ export default function FloorMapWorkspace() {
     return <div className="alert alert-warning">Ground floor data is missing.</div>;
   }
 
-  const floorRooms = rooms.filter((room) => room.floor_id === "ground_floor");
+  const boundRoomIds = new Set(SVG_ROOM_BINDINGS.map((binding) => binding.roomId));
+  const floorRooms = rooms.filter((room) => boundRoomIds.has(room.id));
   const roomById = Object.fromEntries(floorRooms.map((room) => [room.id, room]));
 
   const roomIds = new Set(floorRooms.map((room) => room.id));
@@ -38,7 +41,7 @@ export default function FloorMapWorkspace() {
 
   const svgMarkup = loadSvgFromPublic(groundFloor.floorplan_svg);
 
-  const roomBindings = GROUND_FLOOR_SVG_BINDINGS.map((binding) => {
+  const roomBindings = SVG_ROOM_BINDINGS.map((binding) => {
     const room = roomById[binding.roomId];
     if (!room) {
       return null;
