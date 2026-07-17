@@ -740,8 +740,15 @@ h6 {
   display: block;
 }
 
+/* Walls/doors painted above room fills must not steal clicks (e.g. basement frame). */
+.floorplan-map-frame g#Background,
+.floorplan-map-frame g#FloorMap > path {
+  pointer-events: none;
+}
+
 .floorplan-map-frame g#Rooms path {
   transition: fill 160ms ease;
+  pointer-events: auto;
 }
 
 .floorplan-map-frame g#Rooms path:focus-visible {

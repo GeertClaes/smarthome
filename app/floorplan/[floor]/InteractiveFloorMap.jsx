@@ -157,6 +157,17 @@ export default function InteractiveFloorMap({
 
     host.innerHTML = svgMarkup;
     svgMarkupRef.current = svgMarkup;
+
+    // Decorative walls/doors sit above room fills in the SVG and would steal clicks
+    // (e.g. basement frame over room_bm). Keep only Rooms + Points interactive.
+    const background = host.querySelector("#Background");
+    if (background) {
+      background.style.pointerEvents = "none";
+    }
+    host.querySelectorAll("#FloorMap > path").forEach((pathElement) => {
+      pathElement.style.pointerEvents = "none";
+    });
+
     setSvgVersion((version) => version + 1);
   }, [svgMarkup]);
 
