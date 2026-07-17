@@ -25,12 +25,18 @@
     en: Bathroom
     de: Badezimmer
   floor_id: ground_floor
-- id: car_park_exterior_not_on_interior_floorplan
+- id: car_park
   name: "Car Park"
   name_i18n:
     en: Car Park
     de: Stellplatz
-  floor_id: exterior_site
+  floor_id: ground_floor
+- id: garden
+  name: "Garden"
+  name_i18n:
+    en: Garden
+    de: Garten
+  floor_id: ground_floor
 - id: laundry
   name: "Laundry"
   name_i18n:

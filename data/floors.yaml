@@ -8,9 +8,10 @@
     en: Apartment 4.2, entrance, and garden.
     de: Wohnung 4.2, Eingang und Garten.
   overview_hint_i18n:
-    en: Select a floor on the building diagram. Teal areas — including the garden — belong to property 4.2.
-    de: Stockwerk im Gebäude wählen. Türgrüne Bereiche — einschließlich Garten — gehören zu Objekt 4.2.
+    en: Select a floor on the building diagram, then a room for photos. Teal areas — including garden and parking — belong to property 4.2.
+    de: Stockwerk im Gebäude wählen, dann einen Raum für Fotos. Türgrüne Bereiche — einschließlich Garten und Stellplatz — gehören zu Objekt 4.2.
   floorplan_image: /floorplans/GroundFloor.png
+  rooms_overlay_svg: /floorplans/GroundFloorRooms.svg
   floorplan_svg: /floorplans/FloorMap.svg
   map_legend:
     - id: property
@@ -37,6 +38,7 @@
       Türgrün ist Objekt 4.2 (einschließlich Gartenzugang vom Erdgeschoss). Lila und gelb markierte Bereiche sind mit
       anderen Eigentümern gemeinsam genutzt.
   floorplan_image: /floorplans/Basement.png
+  rooms_overlay_svg: /floorplans/BasementRooms.svg
   floorplan_svg: /floorplans/FloorMap.svg
   map_legend:
     - id: property

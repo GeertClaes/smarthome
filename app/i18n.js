@@ -37,6 +37,10 @@ export const translations = {
     "nav.quickstart": "Quickstart",
     "home.kicker": "Smart Home Operations",
     "home.selectFloor": "Select floor",
+    "home.selectRoom": "Select {room}",
+    "home.selectRoomHint": "Select a room on the plan to view its photos.",
+    "home.roomPhotos": "Room photos",
+    "home.noRoomPhotos": "No photos for this room yet.",
     "home.title": "Choose Ground Floor or Basement",
     "home.subtitle":
       "Use the floor toggle, view a large floor image, then open the interactive map for room drill-down.",
@@ -216,6 +220,10 @@ export const translations = {
     "nav.quickstart": "Schnellstart",
     "home.kicker": "Smart Home Betrieb",
     "home.selectFloor": "Etage wählen",
+    "home.selectRoom": "{room} auswählen",
+    "home.selectRoomHint": "Raum im Plan wählen, um Fotos anzuzeigen.",
+    "home.roomPhotos": "Raumfotos",
+    "home.noRoomPhotos": "Noch keine Fotos für diesen Raum.",
     "home.title": "Erdgeschoss oder Keller auswählen",
     "home.subtitle":
       "Stockwerk umschalten, großes Bild ansehen und danach die interaktive Karte für Raumdetails öffnen.",

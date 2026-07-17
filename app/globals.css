@@ -278,16 +278,33 @@ h6 {
 
 .building-workspace {
   display: grid;
-  grid-template-columns: minmax(165px, 195px) 1px minmax(0, 1fr);
-  gap: 0 1.75rem;
+  grid-template-columns: minmax(165px, 195px) 1px minmax(0, 1fr) 1px minmax(220px, 280px);
+  grid-template-areas: "levels v1 floor v2 room";
+  gap: 0 1.25rem;
   align-items: stretch;
 }
 
 .building-level-rail {
+  grid-area: levels;
   display: flex;
   align-items: center;
   justify-self: center;
   padding-block: 0.25rem;
+}
+
+.building-workspace-divider:not(.building-room-divider) {
+  grid-area: v1;
+}
+
+.building-floor-panel {
+  grid-area: floor;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.building-room-divider {
+  grid-area: v2;
 }
 
 .building-workspace-divider {
@@ -323,10 +340,22 @@ h6 {
   stroke-width: 3;
 }
 
-.building-floor-panel {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
+@media (max-width: 1180px) and (min-width: 1024px) {
+  .building-workspace {
+    grid-template-columns: minmax(150px, 175px) 1px minmax(0, 1fr);
+    grid-template-areas:
+      "levels v1 floor"
+      "room room room";
+  }
+
+  .building-room-divider {
+    display: none;
+  }
+
+  .building-room-detail {
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
 }
 
 .building-floor-head {
@@ -430,6 +459,68 @@ h6 {
   min-height: clamp(280px, 52vh, 640px);
   display: flex;
   align-items: flex-start;
+  justify-content: center;
+}
+
+.building-floor-stack {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 950 / 650;
+  max-height: clamp(280px, 52vh, 640px);
+}
+
+.building-floor-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+}
+
+.building-floor-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.building-floor-overlay svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.building-floor-overlay g#Rooms > path:focus-visible {
+  fill: rgba(127, 217, 196, 0.42);
+  stroke: #9aebd8;
+  stroke-width: 2.5;
+}
+
+.building-room-detail {
+  grid-area: room;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-top: 0.15rem;
+}
+
+.building-room-detail-title {
+  margin: 0;
+  color: #e8f7f2;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.building-room-detail-empty {
+  margin: 0;
+  color: rgba(142, 180, 212, 0.72);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.building-room-detail.is-empty {
   justify-content: center;
 }
 
@@ -2845,6 +2936,12 @@ h6 {
 
   .building-workspace {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "levels"
+      "v1"
+      "floor"
+      "v2"
+      "room";
     gap: 1.1rem 0;
   }
 
@@ -2858,6 +2955,14 @@ h6 {
   .building-level-rail {
     max-width: 210px;
     margin-inline: auto;
+  }
+
+  .building-room-detail {
+    min-height: 0;
+  }
+
+  .building-room-detail.is-empty {
+    justify-content: flex-start;
   }
 
   .building-floor-head {

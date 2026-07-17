@@ -1,15 +1,16 @@
 "use client";
 
-import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import FloorMapLegend from "./components/FloorMapLegend";
+import BuildingRoomDetail from "./BuildingRoomDetail";
 import InteractiveBuildingMap from "./InteractiveBuildingMap";
+import InteractiveFloorOverview from "./InteractiveFloorOverview";
 import { useSiteContent } from "./SiteContentProvider";
 import { useI18n } from "./LanguageProvider";
 
 const FLOOR_ORDER = ["ground_floor", "basement"];
 
-export default function HomeDashboard({ floors, buildingLevelsSvg }) {
+export default function HomeDashboard({ floors, rooms, buildingLevelsSvg, roomOverlaySvgs }) {
   const { t, tl } = useI18n();
   const { ts } = useSiteContent();
 
@@ -18,9 +19,27 @@ export default function HomeDashboard({ floors, buildingLevelsSvg }) {
   }, [floors]);
 
   const [selectedFloorId, setSelectedFloorId] = useState("ground_floor");
+  const [selectedRoomId, setSelectedRoomId] = useState(null);
 
   const currentFloor =
     floorOptions.find((floor) => floor.id === selectedFloorId) ?? floorOptions[0] ?? null;
+
+  const floorRooms = useMemo(() => {
+    if (!currentFloor) {
+      return [];
+    }
+    return rooms.filter((room) => room.floor_id === currentFloor.id);
+  }, [currentFloor, rooms]);
+
+  const selectedRoom = useMemo(() => {
+    return floorRooms.find((room) => room.id === selectedRoomId) ?? null;
+  }, [floorRooms, selectedRoomId]);
+
+  useEffect(() => {
+    setSelectedRoomId(null);
+  }, [selectedFloorId]);
+
+  const overlaySvg = currentFloor ? (roomOverlaySvgs?.[currentFloor.id] ?? "") : "";
 
   return (
     <div className="home-dashboard">
@@ -62,13 +81,14 @@ export default function HomeDashboard({ floors, buildingLevelsSvg }) {
                 <FloorMapLegend legend={currentFloor.map_legend} />
               ) : null}
               <div className="building-floor-canvas">
-                <Image
-                  src={currentFloor.floorplan_image}
-                  alt={tl(currentFloor.name_i18n, currentFloor.name)}
-                  width={1700}
-                  height={980}
-                  className="home-floor-image"
-                  priority
+                <InteractiveFloorOverview
+                  floorId={currentFloor.id}
+                  floorImage={currentFloor.floorplan_image}
+                  floorLabel={tl(currentFloor.name_i18n, currentFloor.name)}
+                  overlaySvg={overlaySvg}
+                  rooms={floorRooms}
+                  selectedRoomId={selectedRoomId}
+                  onSelectRoom={setSelectedRoomId}
                 />
               </div>
             </div>
@@ -76,6 +96,10 @@ export default function HomeDashboard({ floors, buildingLevelsSvg }) {
             <div className="alert alert-warning mt-4">No floor image found.</div>
           )}
         </div>
+
+        <div className="building-workspace-divider building-room-divider" aria-hidden="true" />
+
+        <BuildingRoomDetail room={selectedRoom} />
       </div>
     </div>
   );
