@@ -45,9 +45,10 @@ export default function FloorPlanPointEditor({ point, onSaved, onCancel }) {
     setError("");
 
     try {
+      const { images: _images, ...payload } = form;
       const saved = await adminFetch(`/api/device-points/${point.id}`, {
         method: "PUT",
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       onSaved?.(saved);
       router.refresh();
@@ -57,6 +58,12 @@ export default function FloorPlanPointEditor({ point, onSaved, onCancel }) {
     } finally {
       setSaving(false);
     }
+  }
+
+  function handleImagesChange(images) {
+    const next = { ...form, images };
+    setForm(next);
+    onSaved?.(next);
   }
 
   return (
@@ -84,7 +91,7 @@ export default function FloorPlanPointEditor({ point, onSaved, onCancel }) {
             entityType="device_point"
             entityId={point.id}
             images={form.images}
-            onChange={(images) => setForm((current) => ({ ...current, images }))}
+            onChange={handleImagesChange}
           />
         </div>
       </div>

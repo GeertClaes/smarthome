@@ -53,7 +53,14 @@ export async function PUT(request, { params }) {
       return jsonOk(point, { status: 201 });
     }
 
-    const point = normalizePointPayload({ ...points[index], ...payload }, id);
+    const point = normalizePointPayload(
+      {
+        ...points[index],
+        ...payload,
+        images: Array.isArray(payload.images) ? payload.images : points[index].images,
+      },
+      id,
+    );
     points[index] = point;
     saveDevicePoints(points);
     revalidatePath("/floorplan");

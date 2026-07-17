@@ -44,6 +44,7 @@ export default function FloorPlanMarkerEditor({
   registryDevices = [],
   channels = [],
   onSaved,
+  onUpdated,
   onRemovedFromPoint,
   onChannelsSaved,
   onSelectDevice,
@@ -148,8 +149,9 @@ export default function FloorPlanMarkerEditor({
     setError("");
 
     try {
+      const { images: _images, ...formFields } = form;
       const payload = {
-        ...form,
+        ...formFields,
         floorplan_marker_id: form.floorplan_marker_id || markerId || undefined,
       };
 
@@ -167,7 +169,7 @@ export default function FloorPlanMarkerEditor({
       if (isCreate) {
         const created = await adminFetch("/api/devices", {
           method: "POST",
-          body: JSON.stringify(payload),
+          body: JSON.stringify({ ...payload, images: form.images ?? [] }),
         });
         await saveChannelsForDevice(created.id);
         onSaved?.(created);
@@ -186,6 +188,13 @@ export default function FloorPlanMarkerEditor({
       setError(submitError.message);
     } finally {
       setSaving(false);
+    }
+  }
+
+  function handleImagesChange(images) {
+    updateField("images", images);
+    if (device) {
+      onUpdated?.({ ...device, ...form, images });
     }
   }
 
@@ -351,7 +360,7 @@ export default function FloorPlanMarkerEditor({
               entityType="device"
               entityId={device.id}
               images={form.images}
-              onChange={(images) => updateField("images", images)}
+              onChange={handleImagesChange}
             />
           </section>
         ) : null}

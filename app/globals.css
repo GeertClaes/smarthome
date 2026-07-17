@@ -2492,6 +2492,12 @@ h6 {
   font-size: 0.8rem;
 }
 
+.photo-upload-status {
+  margin: 0.35rem 0 0;
+  color: rgba(154, 235, 216, 0.9);
+  font-size: 0.8rem;
+}
+
 .floorplan-head {
   margin-bottom: 0.35rem;
 }

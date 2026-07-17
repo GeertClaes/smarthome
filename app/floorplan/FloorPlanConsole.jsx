@@ -242,6 +242,19 @@ export default function FloorPlanConsole({
     router.refresh();
   }
 
+  function handleDeviceUpdated(savedDevice) {
+    setLocalDevices((current) => {
+      const index = current.findIndex((entry) => entry.id === savedDevice.id);
+      if (index === -1) {
+        return [...current, savedDevice].toSorted((a, b) => a.name.localeCompare(b.name));
+      }
+
+      const next = [...current];
+      next[index] = savedDevice;
+      return next;
+    });
+  }
+
   function handleDeviceRemovedFromPoint(savedDevice) {
     setLocalDevices((current) => {
       const index = current.findIndex((entry) => entry.id === savedDevice.id);
@@ -401,6 +414,7 @@ export default function FloorPlanConsole({
           onRoomUpdated={handleRoomUpdated}
           onPointUpdated={handlePointUpdated}
           onDeviceSaved={handleDeviceSaved}
+          onDeviceUpdated={handleDeviceUpdated}
           onDeviceRemovedFromPoint={handleDeviceRemovedFromPoint}
           onChannelsSaved={handleChannelsSaved}
           onSelectDevice={(deviceId) => {

@@ -51,7 +51,15 @@ export async function PUT(request, { params }) {
       return jsonError(new Error("Device not found."), 404);
     }
 
-    const device = normalizeDevicePayload(payload, id);
+    const existing = devices[index];
+    const device = normalizeDevicePayload(
+      {
+        ...existing,
+        ...payload,
+        images: Array.isArray(payload.images) ? payload.images : existing.images,
+      },
+      id,
+    );
     devices[index] = device;
     saveDevices(devices);
     revalidateDocumentationPaths({ deviceId: id, roomId: device.installed_room_id });

@@ -2,13 +2,16 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import { useI18n } from "@/app/LanguageProvider";
 import { adminFetch } from "@/lib/adminClient";
 import { prepareImageForUpload } from "@/lib/imageUpload";
 
 export default function PhotoUpload({ entityType, entityId, images, onChange, disabled = false }) {
+  const { t } = useI18n();
   const inputRef = useRef(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
+  const [status, setStatus] = useState("");
 
   const canUpload = Boolean(entityId) && !disabled;
 
@@ -22,6 +25,7 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
 
     setUploading(true);
     setError("");
+    setStatus("");
 
     try {
       const prepared = await prepareImageForUpload(file);
@@ -36,6 +40,7 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
       });
 
       onChange?.(result.images);
+      setStatus(t("photos.saved"));
     } catch (uploadError) {
       setError(uploadError.message || "Upload failed.");
     } finally {
@@ -49,6 +54,7 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
     }
 
     setError("");
+    setStatus("");
 
     try {
       const params = new URLSearchParams({
@@ -60,6 +66,7 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
         method: "DELETE",
       });
       onChange?.(result.images);
+      setStatus(t("photos.removed"));
     } catch (removeError) {
       setError(removeError.message || "Could not remove photo.");
     }
@@ -88,7 +95,9 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
         onChange={handleUpload}
       />
 
+      {canUpload ? <p className="photo-upload-hint">{t("photos.savedHint")}</p> : null}
       {error ? <p className="photo-upload-error">{error}</p> : null}
+      {status ? <p className="photo-upload-status">{status}</p> : null}
 
       {images?.length ? (
         <ul className="photo-upload-grid">

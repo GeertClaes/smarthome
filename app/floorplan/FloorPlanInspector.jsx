@@ -22,6 +22,7 @@ export default function FloorPlanInspector({
   onRoomUpdated,
   onPointUpdated,
   onDeviceSaved,
+  onDeviceUpdated,
   onDeviceRemovedFromPoint,
   onChannelsSaved,
   onSelectDevice,
@@ -50,6 +51,7 @@ export default function FloorPlanInspector({
         registryDevices={registryDevices}
         channels={channels}
         onSaved={onDeviceSaved}
+        onUpdated={onDeviceUpdated}
         onRemovedFromPoint={onDeviceRemovedFromPoint}
         onChannelsSaved={onChannelsSaved}
         onSelectDevice={onSelectDevice}

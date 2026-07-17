@@ -43,15 +43,16 @@ export default function DeviceForm({ device, rooms, deviceTypes, deviceModels = 
     setError("");
 
     try {
+      const { images: _images, ...formFields } = form;
       const payload = {
-        ...form,
+        ...formFields,
         floorplan_marker_id: form.floorplan_marker_id || undefined,
       };
 
       if (mode === "create") {
         const created = await adminFetch("/api/devices", {
           method: "POST",
-          body: JSON.stringify(payload),
+          body: JSON.stringify({ ...payload, images: form.images ?? [] }),
         });
         router.push(`/admin/devices/${created.id}/edit`);
         router.refresh();

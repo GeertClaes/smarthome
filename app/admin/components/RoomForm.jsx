@@ -38,10 +38,12 @@ export default function RoomForm({ room, floors, mode = "edit" }) {
     setError("");
 
     try {
+      const { images: _images, ...payload } = form;
+
       if (mode === "create") {
         const created = await adminFetch("/api/rooms", {
           method: "POST",
-          body: JSON.stringify(form),
+          body: JSON.stringify({ ...payload, images: form.images ?? [] }),
         });
         router.push(`/admin/rooms/${created.id}/edit`);
         router.refresh();
@@ -50,7 +52,7 @@ export default function RoomForm({ room, floors, mode = "edit" }) {
 
       await adminFetch(`/api/rooms/${room.id}`, {
         method: "PUT",
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       router.refresh();
     } catch (submitError) {

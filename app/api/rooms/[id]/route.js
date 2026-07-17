@@ -44,7 +44,15 @@ export async function PUT(request, { params }) {
       return jsonError(new Error("Room not found."), 404);
     }
 
-    const room = normalizeRoomPayload(payload, id);
+    const existing = rooms[index];
+    const room = normalizeRoomPayload(
+      {
+        ...existing,
+        ...payload,
+        images: Array.isArray(payload.images) ? payload.images : existing.images,
+      },
+      id,
+    );
     rooms[index] = room;
     saveRooms(rooms);
     revalidateDocumentationPaths({ roomId: id });

@@ -39,9 +39,10 @@ export default function FloorPlanRoomEditor({ room, onSaved, onCancel }) {
     setError("");
 
     try {
+      const { images: _images, ...payload } = form;
       const saved = await adminFetch(`/api/rooms/${room.id}`, {
         method: "PUT",
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       onSaved?.(saved);
       router.refresh();
@@ -51,6 +52,12 @@ export default function FloorPlanRoomEditor({ room, onSaved, onCancel }) {
     } finally {
       setSaving(false);
     }
+  }
+
+  function handleImagesChange(images) {
+    const next = { ...form, images };
+    setForm(next);
+    onSaved?.(next);
   }
 
   return (
@@ -97,7 +104,7 @@ export default function FloorPlanRoomEditor({ room, onSaved, onCancel }) {
             entityType="room"
             entityId={room.id}
             images={form.images}
-            onChange={(images) => setForm((current) => ({ ...current, images }))}
+            onChange={handleImagesChange}
           />
         </div>
       </div>
