@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { adminFetch } from "@/lib/adminClient";
+import { prepareImageForUpload } from "@/lib/imageUpload";
 
 export default function PhotoUpload({ entityType, entityId, images, onChange, disabled = false }) {
   const inputRef = useRef(null);
@@ -13,6 +14,7 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
 
   async function handleUpload(event) {
     const file = event.target.files?.[0];
+    // Clear immediately so the same file can be re-selected on mobile
     event.target.value = "";
     if (!file || !canUpload) {
       return;
@@ -22,8 +24,9 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
     setError("");
 
     try {
+      const prepared = await prepareImageForUpload(file);
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", prepared, prepared.name || "photo.jpg");
       formData.append("entityType", entityType);
       formData.append("entityId", entityId);
 
@@ -34,7 +37,7 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
 
       onChange?.(result.images);
     } catch (uploadError) {
-      setError(uploadError.message);
+      setError(uploadError.message || "Upload failed.");
     } finally {
       setUploading(false);
     }
@@ -58,7 +61,7 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
       });
       onChange?.(result.images);
     } catch (removeError) {
-      setError(removeError.message);
+      setError(removeError.message || "Could not remove photo.");
     }
   }
 
@@ -76,7 +79,14 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
         {!entityId ? <p className="photo-upload-hint">Save the record first to upload photos.</p> : null}
       </div>
 
-      <input ref={inputRef} type="file" accept="image/*" hidden onChange={handleUpload} />
+      {/* Prefer sr-only over `hidden` — iOS Safari often blocks programmatic clicks on display:none inputs */}
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif,image/*,.jpg,.jpeg,.png,.webp,.gif"
+        className="sr-only"
+        onChange={handleUpload}
+      />
 
       {error ? <p className="photo-upload-error">{error}</p> : null}
 

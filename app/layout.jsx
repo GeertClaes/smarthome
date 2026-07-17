@@ -5,6 +5,7 @@ import { getData } from "@/lib/data";
 import { LanguageProvider } from "./LanguageProvider";
 import { SiteContentProvider } from "./SiteContentProvider";
 import AppHeader from "./AppHeader";
+import AppFooter from "./AppFooter";
 
 const bodyFont = Space_Grotesk({
   subsets: ["latin"],
@@ -65,6 +66,7 @@ export default function RootLayout({ children }) {
             <div className="app-frame">
               <AppHeader />
               <main className="content-pane page-wrap">{children}</main>
+              <AppFooter />
             </div>
           </SiteContentProvider>
         </LanguageProvider>

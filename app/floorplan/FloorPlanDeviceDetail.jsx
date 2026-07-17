@@ -1,5 +1,6 @@
 "use client";
 
+import PhotoGallery from "@/app/components/PhotoGallery";
 import { useI18n } from "@/app/LanguageProvider";
 import { getDeviceIcon, toDeviceTypeKey } from "@/lib/devicePresentation";
 import { findDeviceModelByName } from "@/lib/deviceModels";
@@ -14,11 +15,30 @@ export default function FloorPlanDeviceDetail({
   onEdit,
 }) {
   const { t, tl } = useI18n();
+  const roomPhotos = room?.images ?? [];
 
   if (!device) {
     return (
       <div className="floorplan-device-detail is-empty">
-        <p>{t("floorplan.selectDevice")}</p>
+        {room ? (
+          <>
+            <h2 className="floorplan-detail-title">{tl(room.name_i18n, room.name)}</h2>
+            {roomPhotos.length ? (
+              <div className="floorplan-detail-photos">
+                <p className="floorplan-detail-section-label">{t("floorplan.detail.roomPhotos")}</p>
+                <PhotoGallery
+                  images={roomPhotos}
+                  altPrefix={tl(room.name_i18n, room.name)}
+                  compact
+                />
+              </div>
+            ) : (
+              <p>{t("floorplan.selectDevice")}</p>
+            )}
+          </>
+        ) : (
+          <p>{t("floorplan.selectDevice")}</p>
+        )}
       </div>
     );
   }
@@ -121,13 +141,14 @@ export default function FloorPlanDeviceDetail({
       {device.images?.length ? (
         <div className="floorplan-detail-photos">
           <p className="floorplan-detail-section-label">{t("floorplan.detail.photos")}</p>
-          <div className="photo-gallery photo-gallery-compact">
-            {device.images.map((src) => (
-              <figure key={src} className="photo-gallery-item">
-                <img src={src} alt={device.name} className="photo-gallery-image" />
-              </figure>
-            ))}
-          </div>
+          <PhotoGallery images={device.images} altPrefix={device.name} compact />
+        </div>
+      ) : null}
+
+      {roomPhotos.length ? (
+        <div className="floorplan-detail-photos">
+          <p className="floorplan-detail-section-label">{t("floorplan.detail.roomPhotos")}</p>
+          <PhotoGallery images={roomPhotos} altPrefix={tl(room.name_i18n, room.name)} compact />
         </div>
       ) : null}
     </div>

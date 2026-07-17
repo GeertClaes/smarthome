@@ -73,7 +73,7 @@ export default function AppHeader() {
           <LanguageSwitcher />
           <Link
             href="/admin"
-            className={`btn btn-sm btn-square btn-ghost header-settings-btn ${pathname.startsWith("/admin") ? "is-active" : ""}`}
+            className={`btn btn-sm btn-square btn-ghost header-settings-btn header-settings-desktop ${pathname.startsWith("/admin") ? "is-active" : ""}`}
             aria-label={t("header.settingsLabel")}
           >
             <i className="fa-solid fa-gear" aria-hidden="true" />

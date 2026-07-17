@@ -17,12 +17,34 @@ export const dynamic = "force-dynamic";
 
 const ALLOWED_ENTITY_TYPES = new Set(["device", "room", "device_point"]);
 const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif"]);
+const MIME_EXTENSIONS = {
+  "image/jpeg": ".jpg",
+  "image/jpg": ".jpg",
+  "image/pjpeg": ".jpg",
+  "image/png": ".png",
+  "image/webp": ".webp",
+  "image/gif": ".gif",
+};
 
 const UPLOAD_FOLDER = {
   device: "devices",
   room: "rooms",
   device_point: "device-points",
 };
+
+function resolveImageExtension(file) {
+  const mimeExtension = MIME_EXTENSIONS[String(file.type || "").toLowerCase()];
+  if (mimeExtension) {
+    return mimeExtension;
+  }
+
+  const fromName = path.extname(String(file.name || "")).toLowerCase();
+  if (ALLOWED_EXTENSIONS.has(fromName)) {
+    return fromName;
+  }
+
+  return "";
+}
 
 function getEntityCollection(entityType) {
   if (entityType === "device") {
@@ -113,20 +135,30 @@ export async function POST(request) {
       return jsonError(new Error("Entity id is required."), 400);
     }
 
-    if (!(file instanceof File) || file.size === 0) {
+    if (!(file instanceof Blob) || file.size === 0) {
       return jsonError(new Error("Photo file is required."), 400);
     }
 
-    const extension = path.extname(file.name).toLowerCase() || ".jpg";
+    const type = String(file.type || "").toLowerCase();
+    if (type.includes("heic") || type.includes("heif")) {
+      return jsonError(
+        new Error(
+          "iPhone HEIC photos are not supported. Choose “Most Compatible” in Camera settings, or upload a JPEG.",
+        ),
+        400,
+      );
+    }
+
+    const extension = resolveImageExtension(file);
     if (!ALLOWED_EXTENSIONS.has(extension)) {
-      return jsonError(new Error("Unsupported image type."), 400);
+      return jsonError(new Error("Unsupported image type. Use JPEG, PNG, WebP, or GIF."), 400);
     }
 
     const folder = UPLOAD_FOLDER[entityType];
     const uploadDir = path.join(process.cwd(), "public", "uploads", folder, entityId);
     fs.mkdirSync(uploadDir, { recursive: true });
 
-    const fileName = `${Date.now()}${extension}`;
+    const fileName = `${Date.now()}${extension === ".jpeg" ? ".jpg" : extension}`;
     const buffer = Buffer.from(await file.arrayBuffer());
     fs.writeFileSync(path.join(uploadDir, fileName), buffer);
 
