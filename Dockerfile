@@ -30,17 +30,24 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/data ./data
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-# HEIC conversion deps (may not always be traced into standalone)
+
+# HEIC conversion must load libheif WASM from real node_modules (not the Next bundle).
 COPY --from=builder /app/node_modules/heic-convert ./node_modules/heic-convert
 COPY --from=builder /app/node_modules/heic-decode ./node_modules/heic-decode
 COPY --from=builder /app/node_modules/libheif-js ./node_modules/libheif-js
 COPY --from=builder /app/node_modules/jpeg-js ./node_modules/jpeg-js
 COPY --from=builder /app/node_modules/pngjs ./node_modules/pngjs
+
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
   && mkdir -p public/uploads runtime-data \
-  && chown -R nextjs:nodejs public/uploads data runtime-data node_modules/heic-convert node_modules/heic-decode node_modules/libheif-js node_modules/jpeg-js node_modules/pngjs
+  && chown -R nextjs:nodejs public/uploads data runtime-data \
+    node_modules/heic-convert \
+    node_modules/heic-decode \
+    node_modules/libheif-js \
+    node_modules/jpeg-js \
+    node_modules/pngjs
 
 EXPOSE 3000
 

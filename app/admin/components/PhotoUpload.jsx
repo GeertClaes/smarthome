@@ -24,20 +24,18 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
 
     setUploading(true);
     setError("");
-    setStatus(isHeicLike(file) ? t("photos.converting") : t("photos.preparing"));
+    setStatus(isHeicLike(file) ? t("photos.converting") : t("photos.uploading"));
 
     try {
       const prepared = await prepareImageForUpload(file);
-      setStatus(t("photos.uploading"));
-
       const formData = new FormData();
-      // Always pass an explicit filename — iPad Files often have blank names.
       const uploadName =
-        prepared.name && prepared.name.includes(".")
+        prepared.name && String(prepared.name).includes(".")
           ? prepared.name
-          : prepared.type === "image/heic"
+          : isHeicLike(prepared)
             ? "photo.heic"
             : "photo.jpg";
+
       formData.append("file", prepared, uploadName);
       formData.append("entityType", entityType);
       formData.append("entityId", entityId);
@@ -52,7 +50,11 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
       }
 
       onChange?.(result.images);
-      setStatus(t("photos.saved"));
+      setStatus(
+        result.converted
+          ? t("photos.convertedSaved", { format: String(result.sourceFormat || "HEIC").toUpperCase() })
+          : t("photos.saved"),
+      );
     } catch (uploadError) {
       console.error("Photo upload failed:", uploadError);
       setError(uploadError.message || "Upload failed.");
@@ -100,11 +102,15 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
         {!entityId ? <p className="photo-upload-hint">Save the record first to upload photos.</p> : null}
       </div>
 
-      {/* Prefer sr-only over `hidden` — iOS Safari often blocks programmatic clicks on display:none inputs */}
+      {/*
+        Prefer JPEG first so iOS Photos is more likely to hand us a JPEG.
+        Still allow HEIC — the server converts those with libheif.
+        Prefer sr-only over `hidden` — iOS Safari blocks clicks on display:none inputs.
+      */}
       <input
         ref={inputRef}
         type="file"
-        accept="image/*,.heic,.heif,.jpg,.jpeg,.png,.webp,.gif"
+        accept="image/jpeg,image/jpg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif,image/*"
         className="sr-only"
         onChange={handleUpload}
       />

@@ -4,11 +4,7 @@ import { revalidatePath } from "next/cache";
 import { revalidateDocumentationPaths } from "@/lib/revalidateDocs";
 import { assertAdmin } from "@/lib/adminAuth";
 import { jsonError, jsonOk } from "@/lib/apiResponse";
-import {
-  convertHeicBufferToJpeg,
-  looksLikeHeic,
-  looksLikeSupportedImage,
-} from "@/lib/heicConvertServer";
+import { normalizeUploadBuffer } from "@/lib/heicConvertServer";
 import {
   getDevicePointsRaw,
   getDevicesRaw,
@@ -23,53 +19,12 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 const ALLOWED_ENTITY_TYPES = new Set(["device", "room", "device_point"]);
-const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif"]);
-const MIME_EXTENSIONS = {
-  "image/jpeg": ".jpg",
-  "image/jpg": ".jpg",
-  "image/pjpeg": ".jpg",
-  "image/png": ".png",
-  "image/webp": ".webp",
-  "image/gif": ".gif",
-  "image/heic": ".heic",
-  "image/heif": ".heif",
-};
 
 const UPLOAD_FOLDER = {
   device: "devices",
   room: "rooms",
   device_point: "device-points",
 };
-
-function resolveImageExtension(file) {
-  const mimeExtension = MIME_EXTENSIONS[String(file.type || "").toLowerCase()];
-  if (mimeExtension) {
-    return mimeExtension;
-  }
-
-  const fromName = path.extname(String(file.name || "")).toLowerCase();
-  if (ALLOWED_EXTENSIONS.has(fromName) || fromName === ".heic" || fromName === ".heif") {
-    return fromName;
-  }
-
-  return "";
-}
-
-function extensionForBuffer(buffer) {
-  if (buffer[0] === 0xff && buffer[1] === 0xd8) {
-    return ".jpg";
-  }
-  if (buffer[0] === 0x89 && buffer[1] === 0x50) {
-    return ".png";
-  }
-  if (buffer.toString("ascii", 0, 3) === "GIF") {
-    return ".gif";
-  }
-  if (buffer.toString("ascii", 8, 12) === "WEBP") {
-    return ".webp";
-  }
-  return "";
-}
 
 function getEntityCollection(entityType) {
   if (entityType === "device") {
@@ -91,9 +46,11 @@ function appendImage(entityType, entityId, url) {
   const { items, save } = getEntityCollection(entityType);
   const index = items.findIndex((entry) => entry.id === entityId);
 
-    if (index === -1) {
-      throw new Error(`${entityType} "${entityId}" was not found. Save the record first, then upload photos.`);
-    }
+  if (index === -1) {
+    throw new Error(
+      `${entityType} "${entityId}" was not found. Save the record first, then upload photos.`,
+    );
+  }
 
   const images = Array.isArray(items[index].images) ? [...items[index].images] : [];
   if (!images.includes(url)) {
@@ -119,9 +76,11 @@ function removeImage(entityType, entityId, url) {
   const { items, save } = getEntityCollection(entityType);
   const index = items.findIndex((entry) => entry.id === entityId);
 
-    if (index === -1) {
-      throw new Error(`${entityType} "${entityId}" was not found. Save the record first, then upload photos.`);
-    }
+  if (index === -1) {
+    throw new Error(
+      `${entityType} "${entityId}" was not found. Save the record first, then upload photos.`,
+    );
+  }
 
   const images = (items[index].images ?? []).filter((entry) => entry !== url);
   items[index] = { ...items[index], images };
@@ -164,65 +123,51 @@ export async function POST(request) {
       return jsonError(new Error("Photo file is required."), 400);
     }
 
-    const type = String(file.type || "").toLowerCase();
-    const name = String(file.name || "").toLowerCase();
-    let buffer = Buffer.from(await file.arrayBuffer());
+    const type = String(file.type || "");
+    const name = String(file.name || "photo");
+    const originalBuffer = Buffer.from(await file.arrayBuffer());
 
-    const markedHeic =
-      type.includes("heic") ||
-      type.includes("heif") ||
-      name.endsWith(".heic") ||
-      name.endsWith(".heif") ||
-      looksLikeHeic(buffer);
-
-    if (markedHeic) {
-      try {
-        buffer = await convertHeicBufferToJpeg(buffer, 0.9);
-      } catch (conversionError) {
-        console.error("HEIC conversion failed:", conversionError);
-        return jsonError(
-          new Error(
-            "Could not convert this HEIC photo to JPEG on the server. Please try another photo, or export it from Photos as JPEG.",
-          ),
-          400,
-        );
-      }
-    } else if (!looksLikeSupportedImage(buffer) && looksLikeHeic(buffer)) {
-      // Defensive second pass if MIME/extension lied.
-      try {
-        buffer = await convertHeicBufferToJpeg(buffer, 0.9);
-      } catch (conversionError) {
-        console.error("HEIC conversion failed:", conversionError);
-        return jsonError(
-          new Error("Could not convert this photo to JPEG. Please export it from Photos as JPEG."),
-          400,
-        );
-      }
-    }
-
-    if (!looksLikeSupportedImage(buffer)) {
+    let normalized;
+    try {
+      normalized = await normalizeUploadBuffer(originalBuffer, { type, name });
+    } catch (conversionError) {
+      console.error("Image normalize failed:", {
+        type,
+        name,
+        size: originalBuffer.length,
+        error: conversionError,
+      });
       return jsonError(
-        new Error("Unsupported or damaged image. Please upload a JPEG, PNG, WebP, GIF, or HEIC photo."),
+        new Error(
+          conversionError?.message ||
+            "Could not convert this photo. Please try exporting it from Photos as JPEG.",
+        ),
         400,
       );
-    }
-
-    let extension = extensionForBuffer(buffer) || resolveImageExtension(file);
-    if (extension === ".heic" || extension === ".heif" || !ALLOWED_EXTENSIONS.has(extension)) {
-      extension = ".jpg";
     }
 
     const folder = UPLOAD_FOLDER[entityType];
     const uploadDir = path.join(process.cwd(), "public", "uploads", folder, entityId);
     fs.mkdirSync(uploadDir, { recursive: true });
 
-    const fileName = `${Date.now()}${extension === ".jpeg" ? ".jpg" : extension}`;
-    fs.writeFileSync(path.join(uploadDir, fileName), buffer);
+    const fileName = `${Date.now()}${normalized.extension}`;
+    fs.writeFileSync(path.join(uploadDir, fileName), normalized.buffer);
 
     const url = `/uploads/${folder}/${entityId}/${fileName}`;
     const images = appendImage(entityType, entityId, url);
 
-    return jsonOk({ url, images }, { status: 201 });
+    return jsonOk(
+      {
+        url,
+        images,
+        converted: normalized.converted,
+        sourceFormat: normalized.sourceFormat,
+        outputFormat: normalized.extension.slice(1),
+        bytesIn: originalBuffer.length,
+        bytesOut: normalized.buffer.length,
+      },
+      { status: 201 },
+    );
   } catch (error) {
     return jsonError(error);
   }
