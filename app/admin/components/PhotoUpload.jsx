@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { useI18n } from "@/app/LanguageProvider";
 import { adminFetch } from "@/lib/adminClient";
-import { prepareImageForUpload } from "@/lib/imageUpload";
+import { isHeicLike, prepareImageForUpload } from "@/lib/imageUpload";
 
 export default function PhotoUpload({ entityType, entityId, images, onChange, disabled = false }) {
   const { t } = useI18n();
@@ -24,13 +24,21 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
 
     setUploading(true);
     setError("");
-    setStatus(t("photos.converting"));
+    setStatus(isHeicLike(file) ? t("photos.converting") : t("photos.preparing"));
 
     try {
       const prepared = await prepareImageForUpload(file);
       setStatus(t("photos.uploading"));
+
       const formData = new FormData();
-      formData.append("file", prepared, prepared.name || "photo.jpg");
+      // Always pass an explicit filename — iPad Files often have blank names.
+      const uploadName =
+        prepared.name && prepared.name.includes(".")
+          ? prepared.name
+          : prepared.type === "image/heic"
+            ? "photo.heic"
+            : "photo.jpg";
+      formData.append("file", prepared, uploadName);
       formData.append("entityType", entityType);
       formData.append("entityId", entityId);
 
@@ -39,9 +47,14 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
         body: formData,
       });
 
+      if (!Array.isArray(result.images)) {
+        throw new Error("Upload succeeded but no photo list was returned.");
+      }
+
       onChange?.(result.images);
       setStatus(t("photos.saved"));
     } catch (uploadError) {
+      console.error("Photo upload failed:", uploadError);
       setError(uploadError.message || "Upload failed.");
       setStatus("");
     } finally {

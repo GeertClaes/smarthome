@@ -4,7 +4,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  serverExternalPackages: ["heic-convert", "libheif-js"],
 };
 
 export default nextConfig;

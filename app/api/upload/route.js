@@ -19,6 +19,8 @@ import {
 } from "@/lib/dataStore";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+export const maxDuration = 60;
 
 const ALLOWED_ENTITY_TYPES = new Set(["device", "room", "device_point"]);
 const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif"]);
@@ -89,9 +91,9 @@ function appendImage(entityType, entityId, url) {
   const { items, save } = getEntityCollection(entityType);
   const index = items.findIndex((entry) => entry.id === entityId);
 
-  if (index === -1) {
-    throw new Error(`${entityType} not found.`);
-  }
+    if (index === -1) {
+      throw new Error(`${entityType} "${entityId}" was not found. Save the record first, then upload photos.`);
+    }
 
   const images = Array.isArray(items[index].images) ? [...items[index].images] : [];
   if (!images.includes(url)) {
@@ -117,9 +119,9 @@ function removeImage(entityType, entityId, url) {
   const { items, save } = getEntityCollection(entityType);
   const index = items.findIndex((entry) => entry.id === entityId);
 
-  if (index === -1) {
-    throw new Error(`${entityType} not found.`);
-  }
+    if (index === -1) {
+      throw new Error(`${entityType} "${entityId}" was not found. Save the record first, then upload photos.`);
+    }
 
   const images = (items[index].images ?? []).filter((entry) => entry !== url);
   items[index] = { ...items[index], images };
@@ -177,11 +179,22 @@ export async function POST(request) {
       try {
         buffer = await convertHeicBufferToJpeg(buffer, 0.9);
       } catch (conversionError) {
+        console.error("HEIC conversion failed:", conversionError);
         return jsonError(
           new Error(
-            conversionError?.message ||
-              "Could not convert HEIC photo to JPEG. Please export it from Photos as JPEG and try again.",
+            "Could not convert this HEIC photo to JPEG on the server. Please try another photo, or export it from Photos as JPEG.",
           ),
+          400,
+        );
+      }
+    } else if (!looksLikeSupportedImage(buffer) && looksLikeHeic(buffer)) {
+      // Defensive second pass if MIME/extension lied.
+      try {
+        buffer = await convertHeicBufferToJpeg(buffer, 0.9);
+      } catch (conversionError) {
+        console.error("HEIC conversion failed:", conversionError);
+        return jsonError(
+          new Error("Could not convert this photo to JPEG. Please export it from Photos as JPEG."),
           400,
         );
       }
