@@ -8,7 +8,6 @@ import { findDeviceModelByName } from "@/lib/deviceModels";
 export default function FloorPlanDeviceDetail({
   device,
   room,
-  point,
   deviceModels = [],
   deviceTypeById,
   channels,
@@ -16,42 +15,14 @@ export default function FloorPlanDeviceDetail({
   onEdit,
 }) {
   const { t, tl } = useI18n();
-  const roomPhotos = room?.images ?? [];
-  const pointPhotos = point?.images ?? [];
 
   if (!device) {
     return (
       <div className="floorplan-device-detail is-empty">
         {room ? (
-          <>
-            <h2 className="floorplan-detail-title">{tl(room.name_i18n, room.name)}</h2>
-            {pointPhotos.length ? (
-              <div className="floorplan-detail-photos">
-                <p className="floorplan-detail-section-label">{t("floorplan.detail.pointPhotos")}</p>
-                <PhotoGallery
-                  images={pointPhotos}
-                  altPrefix={point?.code || point?.id || "Point"}
-                  compact
-                />
-              </div>
-            ) : null}
-            {roomPhotos.length ? (
-              <div className="floorplan-detail-photos">
-                <p className="floorplan-detail-section-label">{t("floorplan.detail.roomPhotos")}</p>
-                <PhotoGallery
-                  images={roomPhotos}
-                  altPrefix={tl(room.name_i18n, room.name)}
-                  compact
-                />
-              </div>
-            ) : null}
-            {!pointPhotos.length && !roomPhotos.length ? (
-              <p>{t("floorplan.selectDevice")}</p>
-            ) : null}
-          </>
-        ) : (
-          <p>{t("floorplan.selectDevice")}</p>
-        )}
+          <h2 className="floorplan-detail-title">{tl(room.name_i18n, room.name)}</h2>
+        ) : null}
+        <p>{t("floorplan.selectDevice")}</p>
       </div>
     );
   }
@@ -148,31 +119,6 @@ export default function FloorPlanDeviceDetail({
               );
             })}
           </ul>
-        </div>
-      ) : null}
-
-      {device.images?.length ? (
-        <div className="floorplan-detail-photos">
-          <p className="floorplan-detail-section-label">{t("floorplan.detail.photos")}</p>
-          <PhotoGallery images={device.images} altPrefix={device.name} compact />
-        </div>
-      ) : null}
-
-      {pointPhotos.length ? (
-        <div className="floorplan-detail-photos">
-          <p className="floorplan-detail-section-label">{t("floorplan.detail.pointPhotos")}</p>
-          <PhotoGallery
-            images={pointPhotos}
-            altPrefix={point?.code || point?.id || "Point"}
-            compact
-          />
-        </div>
-      ) : null}
-
-      {roomPhotos.length ? (
-        <div className="floorplan-detail-photos">
-          <p className="floorplan-detail-section-label">{t("floorplan.detail.roomPhotos")}</p>
-          <PhotoGallery images={roomPhotos} altPrefix={tl(room.name_i18n, room.name)} compact />
         </div>
       ) : null}
     </div>

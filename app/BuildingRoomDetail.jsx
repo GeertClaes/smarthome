@@ -9,21 +9,23 @@ export default function BuildingRoomDetail({ room }) {
 
   if (!room) {
     return (
-      <aside className="building-room-detail is-empty" aria-label={t("home.roomPhotos")}>
+      <section className="building-room-detail is-empty" aria-label={t("home.roomPhotos")}>
         <p className="building-room-detail-empty">{t("home.selectRoomHint")}</p>
-      </aside>
+      </section>
     );
   }
 
   return (
-    <aside className="building-room-detail" aria-label={t("home.roomPhotos")}>
-      <p className="section-kicker">{t("home.roomPhotos")}</p>
-      <h2 className="building-room-detail-title">{tl(room.name_i18n, room.name)}</h2>
+    <section className="building-room-detail" aria-label={t("home.roomPhotos")}>
+      <div className="building-room-detail-head">
+        <p className="section-kicker">{t("home.roomPhotos")}</p>
+        <h2 className="building-room-detail-title">{tl(room.name_i18n, room.name)}</h2>
+      </div>
       {photos.length ? (
-        <PhotoGallery images={photos} altPrefix={tl(room.name_i18n, room.name)} compact />
+        <PhotoGallery images={photos} altPrefix={tl(room.name_i18n, room.name)} />
       ) : (
         <p className="building-room-detail-empty">{t("home.noRoomPhotos")}</p>
       )}
-    </aside>
+    </section>
   );
 }

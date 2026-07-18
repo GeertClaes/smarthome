@@ -278,33 +278,16 @@ h6 {
 
 .building-workspace {
   display: grid;
-  grid-template-columns: minmax(165px, 195px) 1px minmax(0, 1fr) 1px minmax(220px, 280px);
-  grid-template-areas: "levels v1 floor v2 room";
-  gap: 0 1.25rem;
+  grid-template-columns: minmax(165px, 195px) 1px minmax(0, 1fr);
+  gap: 0 1.75rem;
   align-items: stretch;
 }
 
 .building-level-rail {
-  grid-area: levels;
   display: flex;
   align-items: center;
   justify-self: center;
   padding-block: 0.25rem;
-}
-
-.building-workspace-divider:not(.building-room-divider) {
-  grid-area: v1;
-}
-
-.building-floor-panel {
-  grid-area: floor;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.building-room-divider {
-  grid-area: v2;
 }
 
 .building-workspace-divider {
@@ -340,22 +323,10 @@ h6 {
   stroke-width: 3;
 }
 
-@media (max-width: 1180px) and (min-width: 1024px) {
-  .building-workspace {
-    grid-template-columns: minmax(150px, 175px) 1px minmax(0, 1fr);
-    grid-template-areas:
-      "levels v1 floor"
-      "room room room";
-  }
-
-  .building-room-divider {
-    display: none;
-  }
-
-  .building-room-detail {
-    padding-top: 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-  }
+.building-floor-panel {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .building-floor-head {
@@ -497,18 +468,25 @@ h6 {
 }
 
 .building-room-detail {
-  grid-area: room;
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
-  padding-top: 0.15rem;
+  gap: 0.75rem;
+}
+
+.building-room-detail-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .building-room-detail-title {
   margin: 0;
   color: #e8f7f2;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -521,7 +499,26 @@ h6 {
 }
 
 .building-room-detail.is-empty {
-  justify-content: center;
+  min-height: 0;
+}
+
+.floorplan-photo-strip {
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.floorplan-photo-strip-section {
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .floorplan-photo-strip {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: start;
+  }
 }
 
 .home-floor-image {
@@ -893,7 +890,43 @@ h6 {
   min-height: clamp(420px, 58vh, 720px);
 }
 
-.floorplan-map-panel {
+@media (max-width: 1180px) {
+  .floorplan-workspace {
+    grid-template-columns: minmax(0, 1.65fr) 1px minmax(180px, 0.7fr);
+    grid-template-areas:
+      "map divider points"
+      "detail detail detail";
+    gap: 1rem 1.15rem;
+    min-height: auto;
+  }
+
+  .floorplan-map-panel {
+    grid-area: map;
+  }
+
+  .floorplan-workspace > .content-divider:nth-of-type(1) {
+    grid-area: divider;
+  }
+
+  .floorplan-workspace > .content-divider:nth-of-type(2) {
+    display: none;
+  }
+
+  .floorplan-device-list-panel {
+    grid-area: points;
+  }
+
+  .floorplan-detail-panel {
+    grid-area: detail;
+    min-width: 0;
+    padding-top: 0.15rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+.floorplan-map-panel,
+.floorplan-device-list-panel,
+.floorplan-detail-panel {
   min-width: 0;
 }
 
@@ -988,10 +1021,6 @@ h6 {
   box-shadow:
     0 0 0 2px rgba(154, 235, 216, 0.55),
     0 0 6px rgba(127, 217, 196, 0.65);
-}
-
-.floorplan-device-list-panel {
-  min-width: 0;
 }
 
 .floorplan-point-list-title {
@@ -1753,6 +1782,17 @@ h6 {
   background: rgba(4, 14, 26, 0.88);
 }
 
+.photo-carousel-open {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+  color: inherit;
+}
+
 .photo-carousel-frame {
   margin: 0;
   aspect-ratio: 16 / 10;
@@ -1879,6 +1919,130 @@ h6 {
 
 .photo-carousel.is-compact .photo-carousel-thumbs {
   display: none;
+}
+
+.photo-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  padding: max(0.75rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right))
+    max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
+  background: rgba(3, 8, 14, 0.94);
+  backdrop-filter: blur(8px);
+}
+
+.photo-lightbox-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.photo-lightbox-count {
+  margin: 0;
+  color: rgba(154, 235, 216, 0.82);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+.photo-lightbox-close {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(154, 235, 216, 0.28);
+  border-radius: 999px;
+  background: rgba(4, 16, 28, 0.72);
+  color: rgba(206, 237, 229, 0.95);
+  cursor: pointer;
+}
+
+.photo-lightbox-stage {
+  position: relative;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+}
+
+.photo-lightbox-frame {
+  margin: 0;
+  width: min(100%, 1200px);
+  height: min(72vh, 820px);
+  display: grid;
+  place-items: center;
+}
+
+.photo-lightbox-image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.35rem;
+}
+
+.photo-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(154, 235, 216, 0.28);
+  border-radius: 999px;
+  background: rgba(4, 16, 28, 0.78);
+  color: rgba(206, 237, 229, 0.95);
+  cursor: pointer;
+}
+
+.photo-lightbox-nav.is-prev {
+  left: 0.35rem;
+}
+
+.photo-lightbox-nav.is-next {
+  right: 0.35rem;
+}
+
+.photo-lightbox-thumbs {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding-bottom: 0.15rem;
+  justify-content: center;
+}
+
+.photo-lightbox-thumb {
+  flex: 0 0 auto;
+  width: 4.5rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(127, 217, 196, 0.18);
+  border-radius: 0.45rem;
+  overflow: hidden;
+  background: rgba(8, 20, 34, 0.72);
+  cursor: pointer;
+  opacity: 0.62;
+}
+
+.photo-lightbox-thumb.is-active,
+.photo-lightbox-thumb:hover {
+  opacity: 1;
+  border-color: rgba(154, 235, 216, 0.55);
+}
+
+.photo-lightbox-thumb-image {
+  display: block;
+  width: 100%;
+  height: 3.2rem;
+  object-fit: cover;
 }
 
 /* Legacy grid kept for any remaining compact lists */
@@ -2936,12 +3100,6 @@ h6 {
 
   .building-workspace {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "levels"
-      "v1"
-      "floor"
-      "v2"
-      "room";
     gap: 1.1rem 0;
   }
 
@@ -2955,14 +3113,6 @@ h6 {
   .building-level-rail {
     max-width: 210px;
     margin-inline: auto;
-  }
-
-  .building-room-detail {
-    min-height: 0;
-  }
-
-  .building-room-detail.is-empty {
-    justify-content: flex-start;
   }
 
   .building-floor-head {
@@ -2988,8 +3138,22 @@ h6 {
 
   .floorplan-workspace {
     grid-template-columns: 1fr;
+    grid-template-areas: none;
     gap: 1.1rem 0;
     min-height: auto;
+  }
+
+  .floorplan-map-panel,
+  .floorplan-device-list-panel,
+  .floorplan-detail-panel,
+  .floorplan-workspace > .content-divider {
+    grid-area: auto;
+  }
+
+  .floorplan-workspace > .content-divider {
+    display: block;
+    width: 100%;
+    height: 1px;
   }
 
   .floorplan-workspace .content-divider {

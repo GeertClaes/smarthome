@@ -6,6 +6,7 @@ import { useI18n } from "@/app/LanguageProvider";
 import { buildRoomDevicePoints, buildNetworkMarkerIdSet } from "@/lib/devicePoints";
 import { groupDevicesByMarker } from "@/lib/floorplanMarkers";
 import FloorPlanInspector from "./FloorPlanInspector";
+import FloorPlanPhotoStrip from "./FloorPlanPhotoStrip";
 import FloorPlanPointList from "./FloorPlanPointList";
 import InteractiveFloorMap from "./[floor]/InteractiveFloorMap";
 
@@ -397,38 +398,44 @@ export default function FloorPlanConsole({
 
         <div className="content-divider" aria-hidden="true" />
 
-        <FloorPlanInspector
-          activeEditor={activeEditor}
-          room={selectedDeviceRoom}
-          point={selectedPoint}
-          device={selectedDevice}
-          devicesAtPoint={devicesAtSelectedPoint}
-          deviceTypes={deviceTypeNames}
-          deviceModels={deviceModels}
-          deviceTypeById={deviceTypeById}
-          channels={localChannels}
-          integrationMap={integrationMap}
-          rooms={adminRooms}
-          devicePoints={floorPlanPoints}
-          registryDevices={registryDevices.length ? registryDevices : localDevices}
-          onRoomUpdated={handleRoomUpdated}
-          onPointUpdated={handlePointUpdated}
-          onDeviceSaved={handleDeviceSaved}
-          onDeviceUpdated={handleDeviceUpdated}
-          onDeviceRemovedFromPoint={handleDeviceRemovedFromPoint}
-          onChannelsSaved={handleChannelsSaved}
-          onSelectDevice={(deviceId) => {
-            setSelectedDeviceId(deviceId);
-            setActiveEditor("device");
-          }}
-          onCloseEditor={closeEditor}
-          onEditDevice={() => {
-            if (selectedDevice) {
+        <div className="floorplan-detail-panel">
+          <FloorPlanInspector
+            activeEditor={activeEditor}
+            room={selectedDeviceRoom}
+            point={selectedPoint}
+            device={selectedDevice}
+            devicesAtPoint={devicesAtSelectedPoint}
+            deviceTypes={deviceTypeNames}
+            deviceModels={deviceModels}
+            deviceTypeById={deviceTypeById}
+            channels={localChannels}
+            integrationMap={integrationMap}
+            rooms={adminRooms}
+            devicePoints={floorPlanPoints}
+            registryDevices={registryDevices.length ? registryDevices : localDevices}
+            onRoomUpdated={handleRoomUpdated}
+            onPointUpdated={handlePointUpdated}
+            onDeviceSaved={handleDeviceSaved}
+            onDeviceUpdated={handleDeviceUpdated}
+            onDeviceRemovedFromPoint={handleDeviceRemovedFromPoint}
+            onChannelsSaved={handleChannelsSaved}
+            onSelectDevice={(deviceId) => {
+              setSelectedDeviceId(deviceId);
               setActiveEditor("device");
-            }
-          }}
-        />
+            }}
+            onCloseEditor={closeEditor}
+            onEditDevice={() => {
+              if (selectedDevice) {
+                setActiveEditor("device");
+              }
+            }}
+          />
+        </div>
       </div>
+
+      {!activeEditor ? (
+        <FloorPlanPhotoStrip device={selectedDevice} point={selectedPoint} room={selectedDeviceRoom} />
+      ) : null}
     </div>
   );
 }

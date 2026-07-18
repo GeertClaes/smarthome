@@ -96,11 +96,9 @@ export default function HomeDashboard({ floors, rooms, buildingLevelsSvg, roomOv
             <div className="alert alert-warning mt-4">No floor image found.</div>
           )}
         </div>
-
-        <div className="building-workspace-divider building-room-divider" aria-hidden="true" />
-
-        <BuildingRoomDetail room={selectedRoom} />
       </div>
+
+      <BuildingRoomDetail room={selectedRoom} />
     </div>
   );
 }
