@@ -24,10 +24,11 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
 
     setUploading(true);
     setError("");
-    setStatus("");
+    setStatus(t("photos.converting"));
 
     try {
       const prepared = await prepareImageForUpload(file);
+      setStatus(t("photos.uploading"));
       const formData = new FormData();
       formData.append("file", prepared, prepared.name || "photo.jpg");
       formData.append("entityType", entityType);
@@ -42,6 +43,7 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
       setStatus(t("photos.saved"));
     } catch (uploadError) {
       setError(uploadError.message || "Upload failed.");
+      setStatus("");
     } finally {
       setUploading(false);
     }
@@ -80,7 +82,7 @@ export default function PhotoUpload({ entityType, entityId, images, onChange, di
           disabled={!canUpload || uploading}
           onClick={() => inputRef.current?.click()}
         >
-          {uploading ? "Uploading…" : "Add photo"}
+          {uploading ? t("photos.uploading") : "Add photo"}
         </button>
         {!entityId ? <p className="photo-upload-hint">Save the record first to upload photos.</p> : null}
       </div>

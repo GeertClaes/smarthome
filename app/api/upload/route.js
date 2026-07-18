@@ -5,6 +5,11 @@ import { revalidateDocumentationPaths } from "@/lib/revalidateDocs";
 import { assertAdmin } from "@/lib/adminAuth";
 import { jsonError, jsonOk } from "@/lib/apiResponse";
 import {
+  convertHeicBufferToJpeg,
+  looksLikeHeic,
+  looksLikeSupportedImage,
+} from "@/lib/heicConvertServer";
+import {
   getDevicePointsRaw,
   getDevicesRaw,
   getRoomsRaw,
@@ -24,6 +29,8 @@ const MIME_EXTENSIONS = {
   "image/png": ".png",
   "image/webp": ".webp",
   "image/gif": ".gif",
+  "image/heic": ".heic",
+  "image/heif": ".heif",
 };
 
 const UPLOAD_FOLDER = {
@@ -39,57 +46,27 @@ function resolveImageExtension(file) {
   }
 
   const fromName = path.extname(String(file.name || "")).toLowerCase();
-  if (ALLOWED_EXTENSIONS.has(fromName)) {
+  if (ALLOWED_EXTENSIONS.has(fromName) || fromName === ".heic" || fromName === ".heif") {
     return fromName;
   }
 
   return "";
 }
 
-function looksLikeHeic(buffer) {
-  if (!Buffer.isBuffer(buffer) || buffer.length < 12) {
-    return false;
+function extensionForBuffer(buffer) {
+  if (buffer[0] === 0xff && buffer[1] === 0xd8) {
+    return ".jpg";
   }
-
-  if (buffer.toString("ascii", 4, 8) !== "ftyp") {
-    return false;
+  if (buffer[0] === 0x89 && buffer[1] === 0x50) {
+    return ".png";
   }
-
-  const brand = buffer.toString("ascii", 8, 12).toLowerCase();
-  return ["heic", "heif", "mif1", "msf1", "heix", "hevc"].includes(brand);
-}
-
-function looksLikeSupportedImage(buffer) {
-  if (!Buffer.isBuffer(buffer) || buffer.length < 12) {
-    return false;
-  }
-
-  // JPEG
-  if (buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff) {
-    return true;
-  }
-
-  // PNG
-  if (
-    buffer[0] === 0x89 &&
-    buffer[1] === 0x50 &&
-    buffer[2] === 0x4e &&
-    buffer[3] === 0x47
-  ) {
-    return true;
-  }
-
-  // GIF
   if (buffer.toString("ascii", 0, 3) === "GIF") {
-    return true;
+    return ".gif";
   }
-
-  // WebP
-  if (buffer.toString("ascii", 0, 4) === "RIFF" && buffer.toString("ascii", 8, 12) === "WEBP") {
-    return true;
+  if (buffer.toString("ascii", 8, 12) === "WEBP") {
+    return ".webp";
   }
-
-  return false;
+  return "";
 }
 
 function getEntityCollection(entityType) {
@@ -186,46 +163,40 @@ export async function POST(request) {
     }
 
     const type = String(file.type || "").toLowerCase();
-    if (type.includes("heic") || type.includes("heif")) {
-      return jsonError(
-        new Error(
-          "HEIC photos must be converted before upload. Please try again — the app converts photos automatically on supported browsers.",
-        ),
-        400,
-      );
-    }
+    const name = String(file.name || "").toLowerCase();
+    let buffer = Buffer.from(await file.arrayBuffer());
 
-    const buffer = Buffer.from(await file.arrayBuffer());
+    const markedHeic =
+      type.includes("heic") ||
+      type.includes("heif") ||
+      name.endsWith(".heic") ||
+      name.endsWith(".heif") ||
+      looksLikeHeic(buffer);
 
-    if (looksLikeHeic(buffer)) {
-      return jsonError(
-        new Error(
-          "This looks like an iPhone/iPad HEIC photo. The browser could not convert it. In Camera settings choose “Most Compatible”, or export the photo as JPEG.",
-        ),
-        400,
-      );
+    if (markedHeic) {
+      try {
+        buffer = await convertHeicBufferToJpeg(buffer, 0.9);
+      } catch (conversionError) {
+        return jsonError(
+          new Error(
+            conversionError?.message ||
+              "Could not convert HEIC photo to JPEG. Please export it from Photos as JPEG and try again.",
+          ),
+          400,
+        );
+      }
     }
 
     if (!looksLikeSupportedImage(buffer)) {
       return jsonError(
-        new Error("Unsupported or damaged image. Please upload a JPEG, PNG, WebP, or GIF."),
+        new Error("Unsupported or damaged image. Please upload a JPEG, PNG, WebP, GIF, or HEIC photo."),
         400,
       );
     }
 
-    let extension = resolveImageExtension(file);
-    if (buffer[0] === 0xff && buffer[1] === 0xd8) {
+    let extension = extensionForBuffer(buffer) || resolveImageExtension(file);
+    if (extension === ".heic" || extension === ".heif" || !ALLOWED_EXTENSIONS.has(extension)) {
       extension = ".jpg";
-    } else if (buffer[0] === 0x89 && buffer[1] === 0x50) {
-      extension = ".png";
-    } else if (buffer.toString("ascii", 0, 3) === "GIF") {
-      extension = ".gif";
-    } else if (buffer.toString("ascii", 8, 12) === "WEBP") {
-      extension = ".webp";
-    }
-
-    if (!ALLOWED_EXTENSIONS.has(extension)) {
-      return jsonError(new Error("Unsupported image type. Use JPEG, PNG, WebP, or GIF."), 400);
     }
 
     const folder = UPLOAD_FOLDER[entityType];
