@@ -99,7 +99,7 @@ runtime-uploads/        → uploaded photos (volume on kelder)
 
 - Source of truth for the interactive map: `FloorMap.svg`
 - App loads: `public/floorplans/FloorMap.svg` (keep these in sync)
-- Rooms: `room_{code}` (e.g. `room_ld`, `room_bm`)
+- Rooms: `room_{code}` (e.g. `room_ld`, `room_ha`) — basement rooms are on Building maps, not FloorMap
 - Points: group `points_{code}`, markers `{code}_{suffix}` (e.g. `ld_cp`, `ba_li`)
 - Human-readable names live in `device_points.yaml` / `rooms.yaml`, not in the SVG
 

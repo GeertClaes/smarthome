@@ -53,9 +53,8 @@ rooms:
   - svg_id: room_st
     legacy_id: Storage
     app_room_id: storage
-  - svg_id: room_bm
-    legacy_id: Basement
-    app_room_id: basement_cellar
+  # room_bm removed from FloorMap.svg — basement rooms are selected on Building maps
+  # (PrivateStorage / Gym / BikeRoom overlays).
 
 point_groups:
   - svg_id: points_of
@@ -82,9 +81,7 @@ point_groups:
   - svg_id: points_st
     legacy_id: Devices-Storage
     app_room_id: storage
-  - svg_id: points_bm
-    legacy_id: Devices-Basement
-    app_room_id: basement_cellar
+  # points_bm removed with basement room from FloorMap.svg
 
 device_points:
   # living/dining (room_ld)

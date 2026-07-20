@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import FloorMapLegend from "./components/FloorMapLegend";
+import { useRouter } from "next/navigation";
+import BuildingAreaList from "./BuildingAreaList";
 import BuildingRoomDetail from "./BuildingRoomDetail";
 import InteractiveBuildingMap from "./InteractiveBuildingMap";
 import InteractiveFloorOverview from "./InteractiveFloorOverview";
+import { getBuildingRoomBindings } from "@/lib/buildingRoomBindings";
 import { useSiteContent } from "./SiteContentProvider";
 import { useI18n } from "./LanguageProvider";
 
@@ -13,6 +15,7 @@ const FLOOR_ORDER = ["ground_floor", "basement"];
 export default function HomeDashboard({ floors, rooms, buildingLevelsSvg, roomOverlaySvgs }) {
   const { t, tl } = useI18n();
   const { ts } = useSiteContent();
+  const router = useRouter();
 
   const floorOptions = useMemo(() => {
     return FLOOR_ORDER.map((id) => floors.find((floor) => floor.id === id)).filter(Boolean);
@@ -20,6 +23,12 @@ export default function HomeDashboard({ floors, rooms, buildingLevelsSvg, roomOv
 
   const [selectedFloorId, setSelectedFloorId] = useState("ground_floor");
   const [selectedRoomId, setSelectedRoomId] = useState(null);
+  const [highlightedRoomId, setHighlightedRoomId] = useState(null);
+  const [roomsState, setRoomsState] = useState(rooms);
+
+  useEffect(() => {
+    setRoomsState(rooms);
+  }, [rooms]);
 
   const currentFloor =
     floorOptions.find((floor) => floor.id === selectedFloorId) ?? floorOptions[0] ?? null;
@@ -28,8 +37,28 @@ export default function HomeDashboard({ floors, rooms, buildingLevelsSvg, roomOv
     if (!currentFloor) {
       return [];
     }
-    return rooms.filter((room) => room.floor_id === currentFloor.id);
-  }, [currentFloor, rooms]);
+    return roomsState.filter((room) => room.floor_id === currentFloor.id);
+  }, [currentFloor, roomsState]);
+
+  const selectableAreas = useMemo(() => {
+    if (!currentFloor) {
+      return [];
+    }
+
+    const roomById = Object.fromEntries(floorRooms.map((room) => [room.id, room]));
+    return getBuildingRoomBindings(currentFloor.id)
+      .map((binding) => {
+        const room = roomById[binding.roomId];
+        if (!room) {
+          return null;
+        }
+        return {
+          ...binding,
+          room,
+        };
+      })
+      .filter(Boolean);
+  }, [currentFloor, floorRooms]);
 
   const selectedRoom = useMemo(() => {
     return floorRooms.find((room) => room.id === selectedRoomId) ?? null;
@@ -37,7 +66,15 @@ export default function HomeDashboard({ floors, rooms, buildingLevelsSvg, roomOv
 
   useEffect(() => {
     setSelectedRoomId(null);
+    setHighlightedRoomId(null);
   }, [selectedFloorId]);
+
+  function handleRoomImagesChange(roomId, images) {
+    setRoomsState((current) =>
+      current.map((room) => (room.id === roomId ? { ...room, images } : room)),
+    );
+    router.refresh();
+  }
 
   const overlaySvg = currentFloor ? (roomOverlaySvgs?.[currentFloor.id] ?? "") : "";
 
@@ -74,12 +111,7 @@ export default function HomeDashboard({ floors, rooms, buildingLevelsSvg, roomOv
           </header>
 
           {currentFloor ? (
-            <div
-              className={`building-floor-body ${currentFloor.map_legend?.length ? "has-legend" : ""}`}
-            >
-              {currentFloor.map_legend?.length ? (
-                <FloorMapLegend legend={currentFloor.map_legend} />
-              ) : null}
+            <div className="building-floor-body">
               <div className="building-floor-canvas">
                 <InteractiveFloorOverview
                   floorId={currentFloor.id}
@@ -88,7 +120,9 @@ export default function HomeDashboard({ floors, rooms, buildingLevelsSvg, roomOv
                   overlaySvg={overlaySvg}
                   rooms={floorRooms}
                   selectedRoomId={selectedRoomId}
+                  highlightedRoomId={highlightedRoomId}
                   onSelectRoom={setSelectedRoomId}
+                  onHighlightRoom={setHighlightedRoomId}
                 />
               </div>
             </div>
@@ -98,7 +132,16 @@ export default function HomeDashboard({ floors, rooms, buildingLevelsSvg, roomOv
         </div>
       </div>
 
-      <BuildingRoomDetail room={selectedRoom} />
+      <div className="building-detail-row">
+        <BuildingAreaList
+          areas={selectableAreas}
+          selectedRoomId={selectedRoomId}
+          highlightedRoomId={highlightedRoomId}
+          onSelectRoom={setSelectedRoomId}
+          onHighlightRoom={setHighlightedRoomId}
+        />
+        <BuildingRoomDetail room={selectedRoom} onImagesChange={handleRoomImagesChange} />
+      </div>
     </div>
   );
 }

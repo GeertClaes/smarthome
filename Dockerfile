@@ -31,12 +31,14 @@ COPY --from=builder /app/data ./data
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# HEIC conversion must load libheif WASM from real node_modules (not the Next bundle).
+# HEIC conversion + sharp must load from real node_modules (not the Next bundle).
 COPY --from=builder /app/node_modules/heic-convert ./node_modules/heic-convert
 COPY --from=builder /app/node_modules/heic-decode ./node_modules/heic-decode
 COPY --from=builder /app/node_modules/libheif-js ./node_modules/libheif-js
 COPY --from=builder /app/node_modules/jpeg-js ./node_modules/jpeg-js
 COPY --from=builder /app/node_modules/pngjs ./node_modules/pngjs
+COPY --from=builder /app/node_modules/sharp ./node_modules/sharp
+COPY --from=builder /app/node_modules/@img ./node_modules/@img
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
@@ -47,7 +49,9 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
     node_modules/heic-decode \
     node_modules/libheif-js \
     node_modules/jpeg-js \
-    node_modules/pngjs
+    node_modules/pngjs \
+    node_modules/sharp \
+    node_modules/@img
 
 EXPOSE 3000
 

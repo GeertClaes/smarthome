@@ -26,6 +26,25 @@ const UPLOAD_FOLDER = {
   device_point: "device-points",
 };
 
+/** Legacy room ids from older YAML → canonical Building / seed ids */
+const LEGACY_ROOM_ID_ALIASES = {
+  garden_exterior_not_on_interior_floorplan: "garden",
+  car_park_exterior_not_on_interior_floorplan: "car_park",
+  back_gate_exterior_not_on_interior_floorplan: "garden",
+  back_deck_exterior_not_on_interior_floorplan: "garden",
+  exterior_tap_garden_not_on_interior_floorplan: "garden",
+};
+
+function resolveRoomId(id) {
+  return LEGACY_ROOM_ID_ALIASES[id] ?? id;
+}
+
+function getUploadsRoot() {
+  // Always under public/ so Next can serve /uploads/...
+  // Docker persists this via volume mount on /app/public/uploads.
+  return path.join(process.cwd(), "public", "uploads");
+}
+
 function getEntityCollection(entityType) {
   if (entityType === "device") {
     return { items: getDevicesRaw(), save: saveDevices };
@@ -42,9 +61,23 @@ function getEntityCollection(entityType) {
   throw new Error("Unsupported entity type.");
 }
 
+function findEntityIndex(items, entityType, entityId) {
+  const direct = items.findIndex((entry) => entry.id === entityId);
+  if (direct !== -1) {
+    return direct;
+  }
+
+  if (entityType !== "room") {
+    return -1;
+  }
+
+  // Accept canonical ids even when YAML still has a legacy exterior room id.
+  return items.findIndex((entry) => resolveRoomId(entry.id) === entityId);
+}
+
 function appendImage(entityType, entityId, url) {
   const { items, save } = getEntityCollection(entityType);
-  const index = items.findIndex((entry) => entry.id === entityId);
+  const index = findEntityIndex(items, entityType, entityId);
 
   if (index === -1) {
     throw new Error(
@@ -57,16 +90,29 @@ function appendImage(entityType, entityId, url) {
     images.push(url);
   }
 
-  items[index] = { ...items[index], images };
+  const current = items[index];
+  const next = { ...current, images };
+
+  // Migrate legacy exterior room rows to canonical Building ids on first photo write.
+  if (entityType === "room" && current.id !== entityId && resolveRoomId(current.id) === entityId) {
+    next.id = entityId;
+    if (entityId === "garden" || entityId === "car_park") {
+      next.floor_id = "ground_floor";
+    }
+  }
+
+  items[index] = next;
   save(items);
 
   if (entityType === "device_point") {
     revalidatePath("/floorplan");
+    revalidatePath("/");
   } else {
     revalidateDocumentationPaths({
       deviceId: entityType === "device" ? entityId : undefined,
       roomId: entityType === "room" ? entityId : undefined,
     });
+    revalidatePath("/");
   }
 
   return images;
@@ -74,7 +120,7 @@ function appendImage(entityType, entityId, url) {
 
 function removeImage(entityType, entityId, url) {
   const { items, save } = getEntityCollection(entityType);
-  const index = items.findIndex((entry) => entry.id === entityId);
+  const index = findEntityIndex(items, entityType, entityId);
 
   if (index === -1) {
     throw new Error(
@@ -86,18 +132,32 @@ function removeImage(entityType, entityId, url) {
   items[index] = { ...items[index], images };
   save(items);
 
-  const filePath = path.join(process.cwd(), "public", url.replace(/^\//, ""));
-  if (filePath.startsWith(path.join(process.cwd(), "public", "uploads")) && fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath);
+  const relative = url.replace(/^\//, "");
+  const candidates = [
+    path.join(process.cwd(), "public", relative),
+    path.join(getUploadsRoot(), relative.replace(/^uploads\/?/, "")),
+  ];
+
+  for (const filePath of candidates) {
+    const uploadsRoot = path.resolve(getUploadsRoot());
+    const publicUploads = path.resolve(process.cwd(), "public", "uploads");
+    if (
+      (filePath.startsWith(uploadsRoot) || filePath.startsWith(publicUploads)) &&
+      fs.existsSync(filePath)
+    ) {
+      fs.unlinkSync(filePath);
+    }
   }
 
   if (entityType === "device_point") {
     revalidatePath("/floorplan");
+    revalidatePath("/");
   } else {
     revalidateDocumentationPaths({
       deviceId: entityType === "device" ? entityId : undefined,
       roomId: entityType === "room" ? entityId : undefined,
     });
+    revalidatePath("/");
   }
 
   return images;
@@ -127,6 +187,10 @@ export async function POST(request) {
     const name = String(file.name || "photo");
     const originalBuffer = Buffer.from(await file.arrayBuffer());
 
+    if (originalBuffer.length < 12) {
+      return jsonError(new Error("Photo file is too small or empty."), 400);
+    }
+
     let normalized;
     try {
       normalized = await normalizeUploadBuffer(originalBuffer, { type, name });
@@ -140,19 +204,32 @@ export async function POST(request) {
       return jsonError(
         new Error(
           conversionError?.message ||
-            "Could not convert this photo. Please try exporting it from Photos as JPEG.",
+            "Could not process this photo. Please try another image or export it as JPEG.",
         ),
         400,
       );
     }
 
     const folder = UPLOAD_FOLDER[entityType];
-    const uploadDir = path.join(process.cwd(), "public", "uploads", folder, entityId);
+    const uploadDir = path.join(getUploadsRoot(), folder, entityId);
     fs.mkdirSync(uploadDir, { recursive: true });
 
-    const fileName = `${Date.now()}${normalized.extension}`;
-    fs.writeFileSync(path.join(uploadDir, fileName), normalized.buffer);
+    const fileName = `${Date.now()}.jpg`;
+    const absolutePath = path.join(uploadDir, fileName);
+    fs.writeFileSync(absolutePath, normalized.buffer);
 
+    // Confirm the bytes landed — empty/partial writes cause "saved but blank" photos.
+    const written = fs.readFileSync(absolutePath);
+    if (written.length < 100 || written[0] !== 0xff || written[1] !== 0xd8) {
+      try {
+        fs.unlinkSync(absolutePath);
+      } catch {
+        // ignore cleanup errors
+      }
+      return jsonError(new Error("Photo was written incorrectly. Please try again."), 500);
+    }
+
+    // Public URL always under /uploads/... (Docker mounts the uploads root there).
     const url = `/uploads/${folder}/${entityId}/${fileName}`;
     const images = appendImage(entityType, entityId, url);
 
@@ -162,13 +239,14 @@ export async function POST(request) {
         images,
         converted: normalized.converted,
         sourceFormat: normalized.sourceFormat,
-        outputFormat: normalized.extension.slice(1),
+        outputFormat: "jpg",
         bytesIn: originalBuffer.length,
         bytesOut: normalized.buffer.length,
       },
       { status: 201 },
     );
   } catch (error) {
+    console.error("Upload POST failed:", error);
     return jsonError(error);
   }
 }

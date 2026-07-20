@@ -2,7 +2,7 @@ import { getData } from "@/lib/data";
 import { loadSvgFromPublic } from "@/lib/svg";
 import FloorPlanConsole from "./FloorPlanConsole";
 
-/** SVG room shapes in FloorMap.svg → app room ids (ground floor + basement). */
+/** SVG room shapes in FloorMap.svg → app room ids (ground floor only; basement is on Building). */
 const SVG_ROOM_BINDINGS = [
   { svgId: "room_ld", roomId: "living_dining" },
   { svgId: "room_st", roomId: "storage" },
@@ -12,7 +12,6 @@ const SVG_ROOM_BINDINGS = [
   { svgId: "room_of", roomId: "home_office" },
   { svgId: "room_ba", roomId: "bathroom" },
   { svgId: "room_br", roomId: "second_bedroom" },
-  { svgId: "room_bm", roomId: "basement_cellar" },
 ];
 
 export default function FloorMapWorkspace() {

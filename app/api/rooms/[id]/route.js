@@ -6,7 +6,7 @@ import { getRoomsRaw, saveRooms } from "@/lib/dataStore";
 export const dynamic = "force-dynamic";
 
 function normalizeRoomPayload(payload, existingId) {
-  return {
+  const room = {
     id: existingId,
     name: payload.name?.trim() || existingId,
     name_i18n: {
@@ -16,6 +16,12 @@ function normalizeRoomPayload(payload, existingId) {
     floor_id: payload.floor_id?.trim() || "ground_floor",
     images: Array.isArray(payload.images) ? payload.images : [],
   };
+
+  if (payload.ownership) {
+    room.ownership = String(payload.ownership).trim();
+  }
+
+  return room;
 }
 
 export async function GET(_request, { params }) {

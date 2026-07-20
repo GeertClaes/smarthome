@@ -2,7 +2,6 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import Image from "next/image";
 import { useI18n } from "@/app/LanguageProvider";
 
 export default function PhotoGallery({
@@ -217,14 +216,13 @@ export default function PhotoGallery({
             aria-label={t("gallery.openFullscreen")}
           >
             <figure className="photo-carousel-frame">
-              <Image
+              {/* Native img — more reliable for runtime /uploads than next/image */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 key={photos[current]}
                 src={photos[current]}
                 alt={`${altPrefix} (${current + 1}/${photos.length})`}
-                width={compact ? 640 : 1200}
-                height={compact ? 420 : 780}
                 className="photo-carousel-image"
-                priority={current === 0}
               />
             </figure>
           </button>

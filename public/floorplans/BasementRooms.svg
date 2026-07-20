@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 650" width="950" height="650" fill="none" role="img">
   <g id="Rooms">
-    <path id="PrivateStorage" d="M666 389V285H619V322H597V389H666Z" />
-    <path id="Gym" d="M344 477H477V395H344V477Z" />
-    <path id="BikeRoom" d="M344 389H446V285H344V389Z" />
-  </g>
+<path id="PrivateStorage" d="M666 389V285H619V322H597V389H666Z"/>
+<path id="Gym" d="M344 477H477V395H344V477Z"/>
+<path id="BikeRoom" d="M344 389H446V285H344V389Z"/>
+</g>
 </svg>

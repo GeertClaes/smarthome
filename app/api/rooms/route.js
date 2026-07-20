@@ -11,7 +11,7 @@ function normalizeRoomPayload(payload, { existingId } = {}) {
     throw new Error("Room id or name is required.");
   }
 
-  return {
+  const room = {
     id,
     name: payload.name?.trim() || id,
     name_i18n: {
@@ -21,6 +21,12 @@ function normalizeRoomPayload(payload, { existingId } = {}) {
     floor_id: payload.floor_id?.trim() || "ground_floor",
     images: Array.isArray(payload.images) ? payload.images : [],
   };
+
+  if (payload.ownership) {
+    room.ownership = String(payload.ownership).trim();
+  }
+
+  return room;
 }
 
 export async function GET() {

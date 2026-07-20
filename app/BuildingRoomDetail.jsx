@@ -1,9 +1,10 @@
 "use client";
 
 import PhotoGallery from "@/app/components/PhotoGallery";
+import PhotoUpload from "@/app/admin/components/PhotoUpload";
 import { useI18n } from "./LanguageProvider";
 
-export default function BuildingRoomDetail({ room }) {
+export default function BuildingRoomDetail({ room, onImagesChange }) {
   const { t, tl } = useI18n();
   const photos = room?.images ?? [];
 
@@ -26,6 +27,15 @@ export default function BuildingRoomDetail({ room }) {
       ) : (
         <p className="building-room-detail-empty">{t("home.noRoomPhotos")}</p>
       )}
+      <div className="building-room-detail-manage">
+        <p className="building-room-detail-manage-label">{t("home.manageRoomPhotos")}</p>
+        <PhotoUpload
+          entityType="room"
+          entityId={room.id}
+          images={photos}
+          onChange={(images) => onImagesChange?.(room.id, images)}
+        />
+      </div>
     </section>
   );
 }
