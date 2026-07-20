@@ -9,6 +9,9 @@ import { useI18n } from "./LanguageProvider";
 const BASE_ROOM_COLOR = "#BEEDE4";
 const HOVER_ROOM_COLOR = "#7FD9C4";
 const SELECTED_ROOM_COLOR = "#0B8A80";
+const TRANSPARENT_FILL = "transparent";
+/** Light wash on hover so the garden still shows through */
+const GARDEN_HOVER_COLOR = "rgba(127, 217, 196, 0.38)";
 
 /** Keep prior highlight briefly when crossing gaps between adjacent rooms */
 const HIGHLIGHT_CLEAR_MS = 90;
@@ -25,14 +28,17 @@ function applyRoomFill(shapeElement, fillColor) {
   shapeElement.style.shapeRendering = "geometricPrecision";
 }
 
-function fillForRoom(roomId, { selectedRoomId, highlightedRoomId }) {
+function fillForBinding(binding, { selectedRoomId, highlightedRoomId }) {
+  const roomId = binding.room.id;
+  const seeThrough = Boolean(binding.transparentUntilSelected);
+
   if (roomId === selectedRoomId) {
     return SELECTED_ROOM_COLOR;
   }
   if (roomId === highlightedRoomId) {
-    return HOVER_ROOM_COLOR;
+    return seeThrough ? GARDEN_HOVER_COLOR : HOVER_ROOM_COLOR;
   }
-  return BASE_ROOM_COLOR;
+  return seeThrough ? TRANSPARENT_FILL : BASE_ROOM_COLOR;
 }
 
 export default function InteractiveFloorOverview({
@@ -109,7 +115,7 @@ export default function InteractiveFloorOverview({
       const isSelected = binding.room.id === selectedId;
       applyRoomFill(
         shapeElement,
-        fillForRoom(binding.room.id, {
+        fillForBinding(binding, {
           selectedRoomId: selectedId,
           highlightedRoomId: highlightedId,
         }),
@@ -176,16 +182,24 @@ export default function InteractiveFloorOverview({
       const onMouseEnter = () => {
         // Paint immediately (floor-plan style) so React state lag can't flash the PNG.
         if (binding.room.id !== selectedRoomIdRef.current) {
-          applyRoomFill(shapeElement, HOVER_ROOM_COLOR);
+          applyRoomFill(
+            shapeElement,
+            fillForBinding(binding, {
+              selectedRoomId: selectedRoomIdRef.current,
+              highlightedRoomId: binding.room.id,
+            }),
+          );
         }
         notifyHighlight(binding.room.id);
       };
 
       const onMouseLeave = () => {
-        const selectedId = selectedRoomIdRef.current;
         applyRoomFill(
           shapeElement,
-          binding.room.id === selectedId ? SELECTED_ROOM_COLOR : BASE_ROOM_COLOR,
+          fillForBinding(binding, {
+            selectedRoomId: selectedRoomIdRef.current,
+            highlightedRoomId: null,
+          }),
         );
         notifyHighlight(null);
       };
